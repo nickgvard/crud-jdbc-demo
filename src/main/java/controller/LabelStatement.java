@@ -1,5 +1,6 @@
 package controller;
 
+import model.entity.Label;
 import service.LabelService;
 
 /**
@@ -9,17 +10,19 @@ import service.LabelService;
 public class LabelStatement {
 
     private final LabelService labelService;
+    private final Label label;
 
-    public LabelStatement() {
-        labelService = new LabelService();
+    public LabelStatement(final int id, final String name) {
+        label = new Label(id, name);
+        labelService = new LabelService(label);
     }
 
     public void createLabelStatement() {
         labelService.createLabelService();
     }
 
-    public void readLabelStatement() {
-        labelService.readLabelService();
+    public Label readLabelStatement() {
+        return labelService.readLabelService();
     }
 
     public void updateLabelStatement() {

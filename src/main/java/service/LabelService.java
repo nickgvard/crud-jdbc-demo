@@ -1,5 +1,6 @@
 package service;
 
+import model.entity.Label;
 import repository.LabelRepository;
 
 /**
@@ -9,17 +10,19 @@ import repository.LabelRepository;
 public class LabelService {
 
     private final LabelRepository labelRepository;
+    private final Label label;
 
-    public LabelService() {
-        labelRepository = new LabelRepository();
+    public LabelService(final Label label) {
+        this.label = label;
+        labelRepository = new LabelRepository(label);
     }
 
     public void createLabelService() {
         labelRepository.createLabelRepository();
     }
 
-    public void readLabelService() {
-        labelRepository.readLabelRepository();
+    public Label readLabelService() {
+        return labelRepository.readLabelRepository();
     }
 
     public void updateLabelService() {

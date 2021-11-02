@@ -1,6 +1,5 @@
-.idea
+.idea/*.xml
 *.class
-
 *.jar
 *.war
 *.ear
