@@ -6,6 +6,19 @@ package repository;
  */
 public class LabelRepository {
 
+    public void createLabelRepository() {
 
+    }
 
+    public void readLabelRepository() {
+
+    }
+
+    public void updateLabelRepository() {
+
+    }
+
+    public void deleteLabelRepository() {
+
+    }
 }

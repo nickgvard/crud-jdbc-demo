@@ -14,19 +14,19 @@ public class LabelStatement {
         labelService = new LabelService();
     }
 
-    public void createLabel() {
-
+    public void createLabelStatement() {
+        labelService.createLabelService();
     }
 
-    public void readLabel() {
-
+    public void readLabelStatement() {
+        labelService.readLabelService();
     }
 
-    public void updateLabel() {
-
+    public void updateLabelStatement() {
+        labelService.updateLabelService();
     }
 
-    public void deleteLabel() {
-
+    public void deleteLabelStatement() {
+        labelService.deleteLabelService();
     }
 }
