@@ -1,0 +1,10 @@
+/shelf/
+/.idea/workspace.xml
+/dataSources/
+/dataSources.local.xml
+/httpRequests/
+.idea/*
+*.class
+*.jar
+*.war
+*.ear
