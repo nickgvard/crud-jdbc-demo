@@ -1,13 +1,10 @@
 package service;
 
 import model.entity.Label;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import repository.LabelRepository;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
@@ -21,33 +18,32 @@ public class LabelServiceTest {
     @Mock
     private LabelService labelService;
 
-    @Mock
-    private LabelRepository labelRepository;
-
-    private Label label;
-
-    @Before
-    public void setUp() {
-        label = new Label(1, "someNameLabel");
+    @Test
+    public void createLabel() {
+        doNothing().when(labelService).createLabel();
+        labelService.createLabel();
+        verify(labelService, times(1)).createLabel();
     }
 
     @Test
-    public void testCreateLabelService() {
-        labelService.createLabelService();
-    }
-
-    @Test
-    public void testReadLabelService() {
+    public void label() {
         Label expected = new Label(1, "someNameLabel");
-        when(labelRepository.readLabelRepository()).thenReturn(label);
+        when(labelService.label()).thenReturn(new Label(1, "someNameLabel"));
 
-        assertEquals(expected.name(), label.name());
+        assertEquals(expected.name(), labelService.label().name());
     }
 
     @Test
-    public void testReadLabelServiceNull() {
-        when(labelRepository.readLabelRepository()).thenReturn(null);
-        when(labelService.readLabelService()).thenReturn(null);
-        assertNull(labelService.readLabelService());
+    public void updateLabel() {
+        doNothing().when(labelService).updateLabel();
+        labelService.updateLabel();
+        verify(labelService, times(1)).updateLabel();
+    }
+
+    @Test
+    public void deleteLabel() {
+        doNothing().when(labelService).deleteLabel();
+        labelService.deleteLabel();
+        verify(labelService, times(1)).deleteLabel();
     }
 }

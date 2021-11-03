@@ -17,19 +17,19 @@ public class LabelRepository {
         dataSource = new DataBaseSource();
     }
 
-    public void createLabelRepository() {
-        System.out.println("Label " + label.id() + ":" +  label.name() + " inserted in database");
+    public void createLabel() {
+        dataSource.createData();
     }
 
-    public Label readLabelRepository() {
-        return (Label)dataSource.readData();
+    public Label label() {
+        return (Label)dataSource.data();
     }
 
-    public void updateLabelRepository() {
-
+    public void updateLabel() {
+        dataSource.updateData();
     }
 
-    public void deleteLabelRepository() {
-
+    public void deleteLabel() {
+        dataSource.deleteData();
     }
 }

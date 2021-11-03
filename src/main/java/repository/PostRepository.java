@@ -1,8 +1,7 @@
 package repository;
 
 import model.entity.Post;
-
-import java.util.List;
+import utils.database.DataBaseSource;
 
 /**
  * @author Nikita Gvardeev 01.11.2021
@@ -10,7 +9,27 @@ import java.util.List;
  */
 public class PostRepository {
 
-    public List<Post> allPosts() {
-        return null;
+    private final Post post;
+    private final DataBaseSource dataSource;
+
+    public PostRepository(Post post) {
+        this.post = post;
+        dataSource = new DataBaseSource();
+    }
+
+    public void createPost() {
+        dataSource.createData();
+    }
+
+    public Post post() {
+        return (Post)dataSource.data();
+    }
+
+    public void updatePost() {
+        dataSource.updateData();
+    }
+
+    public void deletePost() {
+        dataSource.deleteData();
     }
 }

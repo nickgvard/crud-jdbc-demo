@@ -6,7 +6,7 @@ public class DataBaseSource {
 
     }
 
-    public Object readData() {
+    public Object data() {
         return new Object();
     }
 

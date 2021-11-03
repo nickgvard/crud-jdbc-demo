@@ -17,20 +17,20 @@ public class LabelService {
         labelRepository = new LabelRepository(label);
     }
 
-    public void createLabelService() {
-        labelRepository.createLabelRepository();
+    public void createLabel() {
+        labelRepository.createLabel();
     }
 
-    public Label readLabelService() {
-        return labelRepository.readLabelRepository();
+    public Label label() {
+        return labelRepository.label();
     }
 
-    public void updateLabelService() {
-        labelRepository.updateLabelRepository();
+    public void updateLabel() {
+        labelRepository.updateLabel();
     }
 
-    public void deleteLabelService() {
-        labelRepository.deleteLabelRepository();
+    public void deleteLabel() {
+        labelRepository.deleteLabel();
     }
 
 }
