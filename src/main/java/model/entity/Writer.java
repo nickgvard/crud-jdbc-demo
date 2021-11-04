@@ -1,5 +1,6 @@
 package model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,10 @@ public class Writer extends BaseEntity {
         this.posts = posts;
     }
 
+    public Writer(long id, String firstName, String lastName) {
+        this(id, firstName, lastName, new ArrayList<>());
+    }
+
     public String firstName() {
         return firstName;
     }
@@ -29,5 +34,9 @@ public class Writer extends BaseEntity {
 
     public List<Post> posts() {
         return posts;
+    }
+
+    public void addPost(Post post) {
+        posts.add(post);
     }
 }

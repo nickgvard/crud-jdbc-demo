@@ -9,7 +9,7 @@ import repository.LabelRepository;
  */
 public class LabelService {
 
-    private final LabelRepository labelRepository;
+    private LabelRepository labelRepository;
     private final Label label;
 
     public LabelService(final Label label) {
@@ -32,5 +32,4 @@ public class LabelService {
     public void deleteLabel() {
         labelRepository.deleteLabel();
     }
-
 }

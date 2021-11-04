@@ -10,7 +10,7 @@ import repository.PostRepository;
 public class PostService {
 
     private final Post post;
-    private final PostRepository postRepository;
+    private PostRepository postRepository;
 
     public PostService(Post post) {
         this.post = post;

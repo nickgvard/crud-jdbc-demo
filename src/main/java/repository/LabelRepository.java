@@ -18,7 +18,7 @@ public class LabelRepository {
     }
 
     public void createLabel() {
-        dataSource.createData();
+//        dataSource.createData();
     }
 
     public Label label() {
