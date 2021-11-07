@@ -1,8 +1,8 @@
 package controller;
 
-import model.entity.Post;
 import model.entity.Writer;
 import service.WriterService;
+import view.WriterView;
 
 import java.util.List;
 
@@ -12,33 +12,31 @@ import java.util.List;
  */
 public class WriterStatement {
 
-    private final Writer writer;
-    private final WriterService writerService;
+    private WriterService writerService;
+    private WriterView writerView;
 
-    public WriterStatement(int id, String firstName, String lastName) {
-        writer = new Writer(id, firstName, lastName);
-        writerService = new WriterService(writer);
+    public WriterStatement() {
+        writerService = new WriterService();
+        writerView = new WriterView();
     }
 
-    public WriterStatement(int id, String firstName, String lastName, List<Post> posts) {
-        writer = new Writer(id, firstName, lastName, posts);
-        writerService = new WriterService(writer);
+    public void create(Writer entity) {
+        writerService.create(entity);
     }
 
-    public void createWriter() {
-        writerService.createWriter();
+    public void update(Writer entity) {
+        writerService.update(entity);
     }
 
-    public Writer writer() {
-        return writerService.writer();
+    public void delete(Writer entity) {
+        writerService.delete(entity);
     }
 
-    public void updateWriter() {
-        writerService.updateWriter();
+    public List<Writer> read() {
+        return writerService.read();
     }
 
-    public void deleteWrite() {
-        writerService.deleteWriter();
+    public void updateWriterView() {
+        writerView.showAllWriters(read());
     }
-
 }

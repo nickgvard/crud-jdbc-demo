@@ -10,6 +10,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import repository.LabelRepository;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -19,6 +22,9 @@ import static org.junit.Assert.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class LabelServiceTest {
+
+    @Mock
+    private Label label;
 
     @Mock
     private LabelRepository mockLabelRepository;
@@ -32,38 +38,35 @@ public class LabelServiceTest {
     }
 
     @Test
-    public void whenCreateLabelTest() {
-        doNothing().when(mockLabelRepository).createLabel();
-
-        labelService.createLabel();
-        verify(mockLabelRepository, times(1)).createLabel();
-    }
-
-    @Test
     public void whenReadLabelAndEqFields() {
-        Label expected = new Label(1, "Some name label");
-        when(mockLabelRepository.label()).thenReturn(new Label(1, "Some name label"));
+        List<Label> expected = Arrays.asList(label(), label());
+        when(mockLabelRepository.read()).thenReturn(Arrays.asList(label(), label()));
 
-        Label actual = labelService.label();
-        verify(mockLabelRepository, times(1)).label();
+        List<Label> actual = labelService.read();
+        verify(mockLabelRepository, times(1)).read();
 
-        assertEquals(expected.id(), actual.id());
-        assertEquals(expected.name(), actual.name());
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected.get(0).id(), actual.get(0).id());
+        assertEquals(expected.get(0).name(), actual.get(0).name());
     }
 
     @Test
     public void whenUpdateLabel() {
-        doNothing().when(mockLabelRepository).updateLabel();
-        labelService.updateLabel();
+        doNothing().when(mockLabelRepository).update(label);
+        labelService.update(label);
 
-        verify(mockLabelRepository, times(1)).updateLabel();
+        verify(mockLabelRepository, times(1)).update(label);
     }
 
     @Test
     public void whenDeleteLabel() {
-        doNothing().when(mockLabelRepository).deleteLabel();
-        labelService.deleteLabel();
+        doNothing().when(mockLabelRepository).remove(label);
+        labelService.delete(label);
 
-        verify(mockLabelRepository, times(1)).deleteLabel();
-   }
+        verify(mockLabelRepository, times(1)).remove(label);
+    }
+
+    private Label label() {
+        return new Label(1, "Some name label");
+    }
 }

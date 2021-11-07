@@ -1,35 +1,42 @@
 package repository;
 
 import model.enums.PostStatus;
-import utils.database.DataBaseSource;
+import repository.interfaces.Repository;
+import utils.database.DataBaseAccess;
+
+import java.util.List;
 
 /**
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
  */
-public class PostStatusRepo {
+public class PostStatusRepository implements Repository<PostStatus> {
 
     private final PostStatus postStatus;
-    private final DataBaseSource dataSource;
+    private final DataBaseAccess dataSource;
 
-    public PostStatusRepo(PostStatus postStatus) {
+    public PostStatusRepository(PostStatus postStatus) {
         this.postStatus = postStatus;
-        dataSource = new DataBaseSource();
+        dataSource = new DataBaseAccess();
     }
 
-    public void createPostStatus() {
-        dataSource.createData();
+    @Override
+    public void add(PostStatus entity) {
+
     }
 
-    public PostStatus postStatus() {
-        return (PostStatus)dataSource.data();
+    @Override
+    public void remove(PostStatus entity) {
+
     }
 
-    public void updatePostStatus() {
-        dataSource.updateData();
+    @Override
+    public void update(PostStatus entity) {
+
     }
 
-    public void deletePostStatus() {
-        dataSource.deleteData();
+    @Override
+    public List<PostStatus> read() {
+        return null;
     }
 }

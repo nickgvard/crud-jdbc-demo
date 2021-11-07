@@ -3,33 +3,33 @@ package service;
 import model.entity.Writer;
 import repository.WriterRepository;
 
+import java.util.List;
+
 /**
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
  */
 public class WriterService {
 
-    private final Writer writer;
     private WriterRepository writerRepository;
 
-    public WriterService(Writer writer) {
-        this.writer = writer;
-        writerRepository = new WriterRepository(writer);
+    public WriterService() {
+        writerRepository = new WriterRepository();
     }
 
-    public void createWriter() {
-        writerRepository.createWriter();
+    public void create(Writer writer) {
+        writerRepository.add(writer);
     }
 
-    public Writer writer() {
-        return writerRepository.writer();
+    public List<Writer> read() {
+        return writerRepository.read();
     }
 
-    public void updateWriter() {
-        writerRepository.updateWriter();
+    public void update(Writer writer) {
+        writerRepository.update(writer);
     }
 
-    public void deleteWriter() {
-        writerRepository.deleteWriter();
+    public void delete(Writer writer) {
+        writerRepository.remove(writer);
     }
 }

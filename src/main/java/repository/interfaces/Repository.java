@@ -1,10 +1,12 @@
-package repository;
+package repository.interfaces;
 
-public interface Repository {
+import java.util.List;
 
-    void add();
-    void remove();
-    void update();
+public interface Repository<T> {
 
-    Object resultQuery();
+    void add(T entity);
+    void remove(T entity);
+    void update(T entity);
+
+    List<T> read();
 }

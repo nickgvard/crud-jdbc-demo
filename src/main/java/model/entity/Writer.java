@@ -20,8 +20,8 @@ public class Writer extends BaseEntity {
         this.posts = posts;
     }
 
-    public Writer(long id, String firstName, String lastName) {
-        this(id, firstName, lastName, new ArrayList<>());
+    public Writer(String firstName, String lastName) {
+        this(0L, firstName, lastName, new ArrayList<>());
     }
 
     public String firstName() {
@@ -38,5 +38,13 @@ public class Writer extends BaseEntity {
 
     public void addPost(Post post) {
         posts.add(post);
+    }
+
+    @Override
+    public String toString() {
+        return "Writer {" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                "}";
     }
 }

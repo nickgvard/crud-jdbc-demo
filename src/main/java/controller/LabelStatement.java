@@ -2,6 +2,9 @@ package controller;
 
 import model.entity.Label;
 import service.LabelService;
+import view.LabelView;
+
+import java.util.List;
 
 /**
  * @author Nikita Gvardeev 01.11.2021
@@ -10,26 +13,26 @@ import service.LabelService;
 public class LabelStatement {
 
     private final LabelService labelService;
-    private final Label label;
+    private final LabelView labelView;
 
-    public LabelStatement(final int id, final String name) {
-        label = new Label(id, name);
-        labelService = new LabelService(label);
+    public LabelStatement() {
+        labelService = new LabelService();
+        labelView = new LabelView();
     }
 
-    public void createLabel() {
-        labelService.createLabel();
+    public void update(Label entity) {
+        labelService.update(entity);
     }
 
-    public Label label() {
-        return labelService.label();
+    public void delete(Label entity) {
+        labelService.delete(entity);
     }
 
-    public void updateLabel() {
-        labelService.updateLabel();
+    public List<Label> read() {
+        return labelService.read();
     }
 
-    public void deleteLabel() {
-        labelService.deleteLabel();
+    public void updateLabelView() {
+        labelView.showAllLabels(read());
     }
 }

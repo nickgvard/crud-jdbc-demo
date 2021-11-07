@@ -1,7 +1,10 @@
 package service;
 
 import model.entity.Post;
+import model.entity.Writer;
 import repository.PostRepository;
+
+import java.util.List;
 
 /**
  * @author Nikita Gvardeev 01.11.2021
@@ -9,27 +12,29 @@ import repository.PostRepository;
  */
 public class PostService {
 
-    private final Post post;
     private PostRepository postRepository;
 
-    public PostService(Post post) {
-        this.post = post;
-        postRepository = new PostRepository(post);
+    public PostService(Writer writer) {
+        postRepository = new PostRepository(writer);
     }
 
-    public void createPost() {
-        postRepository.createPost();
+    public PostService() {
+        postRepository = new PostRepository();
     }
 
-    public Post post() {
-        return postRepository.post();
+    public void create(Post post) {
+        postRepository.add(post);
     }
 
-    public void updatePost() {
-        postRepository.updatePost();
+    public void update(Post post) {
+        postRepository.add(post);
     }
 
-    public void deletePost() {
-        postRepository.deletePost();
+    public void delete(Post post) {
+        postRepository.remove(post);
+    }
+
+    public List<Post> read() {
+        return postRepository.read();
     }
 }

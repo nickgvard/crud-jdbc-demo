@@ -1,10 +1,10 @@
 package controller;
 
-import model.entity.Label;
 import model.entity.Post;
+import model.entity.Writer;
 import service.PostService;
+import view.PostView;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -13,27 +13,36 @@ import java.util.List;
  */
 public class PostStatement {
 
-    private final Post post;
     private final PostService postService;
+    private final PostView postView;
 
-    public PostStatement(long id, String content, Timestamp created, Timestamp updated, List<Label> labels) {
-        post = new Post(id, content, created, updated, labels);
-        postService = new PostService(post);
+    public PostStatement(Writer writer) {
+        postService = new PostService(writer);
+        postView = new PostView();
     }
 
-    public void createPost() {
-        postService.createPost();
+    public PostStatement() {
+        postService = new PostService();
+        postView = new PostView();
     }
 
-    public Post post() {
-        return postService.post();
+    public void create(Post entity) {
+        postService.create(entity);
     }
 
-    public void updatePost() {
-        postService.updatePost();
+    public void update(Post entity) {
+        postService.update(entity);
     }
 
-    public void deletePost() {
-        postService.deletePost();
+    public void delete(Post entity) {
+        postService.delete(entity);
+    }
+
+    public List<Post> read() {
+        return postService.read();
+    }
+
+    public void updatePostView() {
+        postView.showAllPosts(read());
     }
 }

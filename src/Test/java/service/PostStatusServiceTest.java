@@ -10,6 +10,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import repository.PostStatusRepository;
 
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -19,6 +22,9 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PostStatusServiceTest {
+
+    @Mock
+    PostStatus postStatus;
 
     @Mock
     private PostStatusRepository statusRepository;
@@ -33,55 +39,55 @@ public class PostStatusServiceTest {
 
     @Test
     public void whenCreatePostStatus() {
-        doNothing().when(statusRepository).createPostStatus();
+        doNothing().when(statusRepository).add(postStatus);
 
-        statusService.createPostStatus();
-        verify(statusRepository).createPostStatus();
+        statusService.create();
+        verify(statusRepository).add(postStatus);
     }
 
     @Test
     public void whenReadPostStatusACTIVE() {
         PostStatus expected = PostStatus.ACTIVE;
-        when(statusRepository.postStatus()).thenReturn(PostStatus.ACTIVE);
+        when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.ACTIVE));
 
-        PostStatus actual = statusService.postStatus();
+        List<PostStatus> actual = statusService.read();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.get(0));
     }
 
     @Test
     public void whenReadPostStatusDELETED() {
         PostStatus expected = PostStatus.DELETED;
-        when(statusRepository.postStatus()).thenReturn(PostStatus.DELETED);
+        when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.DELETED));
 
-        PostStatus actual = statusService.postStatus();
+        List<PostStatus> actual = statusService.read();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.get(0));
     }
 
     @Test
     public void whenReadPostStatusUNDER_REVIEW() {
         PostStatus expected = PostStatus.UNDER_REVIEW;
-        when(statusRepository.postStatus()).thenReturn(PostStatus.UNDER_REVIEW);
+        when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.UNDER_REVIEW));
 
-        PostStatus actual = statusService.postStatus();
+        List<PostStatus> actual = statusService.read();
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual.get(0));
     }
 
     @Test
     public void whenUpdatePostStatus() {
-        doNothing().when(statusRepository).updatePostStatus();
+        doNothing().when(statusRepository).update(postStatus);
 
-        statusService.updatePostStatus();
-        verify(statusRepository).updatePostStatus();
+        statusService.update();
+        verify(statusRepository).update(postStatus);
     }
 
     @Test
     public void whenDeletePostStatus() {
-        doNothing().when(statusRepository).deletePostStatus();
+        doNothing().when(statusRepository).remove(postStatus);
 
-        statusService.deletePostStatus();
-        verify(statusRepository).deletePostStatus();
+        statusService.delete();
+        verify(statusRepository).remove(postStatus);
     }
 }

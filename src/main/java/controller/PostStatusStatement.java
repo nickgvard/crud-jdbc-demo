@@ -3,6 +3,8 @@ package controller;
 import model.enums.PostStatus;
 import service.PostStatusService;
 
+import java.util.List;
+
 /**
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
@@ -17,19 +19,19 @@ public class PostStatusStatement {
         statusService = new PostStatusService(postStatus);
     }
 
-    public void createPostStatus() {
-        statusService.createPostStatus();
+    public void create() {
+        statusService.create();
     }
 
-    public PostStatus postStatus() {
-        return statusService.postStatus();
+    public void update() {
+        statusService.update();
     }
 
-    public void updatePostStatus() {
-        statusService.updatePostStatus();
+    public void delete() {
+        statusService.delete();
     }
 
-    public void deletePostStatus() {
-        statusService.deletePostStatus();
+    public List<PostStatus> read() {
+        return statusService.read();
     }
 }

@@ -1,35 +1,113 @@
 package repository;
 
+import model.entity.Label;
 import model.entity.Post;
-import utils.database.DataBaseSource;
+import model.entity.Writer;
+import model.enums.PostStatus;
+import repository.interfaces.Repository;
+import utils.database.DataBaseAccess;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
  */
-public class PostRepo {
+public class PostRepository implements Repository<Post> {
 
-    private final Post post;
-    private final DataBaseSource dataSource;
+    private final DataBaseAccess dataAccess;
+    private Writer writer;
 
-    public PostRepo(Post post) {
-        this.post = post;
-        dataSource = new DataBaseSource();
+    public PostRepository(Writer writer) {
+        this.writer = writer;
+        dataAccess = new DataBaseAccess();
     }
 
-    public void createPost() {
-        dataSource.createData();
+    public PostRepository() {
+        dataAccess = new DataBaseAccess();
     }
 
-    public Post post() {
-        return (Post)dataSource.data();
+    @Override
+    public void add(Post entity) {
+        String SQL = "INSERT INTO posts(Content, Created, PostStatusId, WriterId) VALUES (?,?,?,?)";
+        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
+            preparedStatement.setString(1, entity.content());
+            preparedStatement.setTimestamp(2, entity.created());
+            preparedStatement.setLong(3, PostStatus.UNDER_REVIEW.statusId());
+            preparedStatement.setLong(4, writer.id());
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            long currentId;
+            if(resultSet.next())
+                currentId = resultSet.getLong(1);
+            else
+                throw new RuntimeException("Creating failed");
+
+            addLabelsToPost(entity, currentId);
+
+            resultSet.close();
+            dataAccess.releaseConnection(preparedStatement.getConnection());
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 
-    public void updatePost() {
-        dataSource.updateData();
+    @Override
+    public void remove(Post entity) {
+        String SQL = "DELETE FROM posts WHERE id = ?";
+        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
+            preparedStatement.setLong(1, entity.id());
+            preparedStatement.executeUpdate();
+
+            dataAccess.releaseConnection(preparedStatement.getConnection());
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 
-    public void deletePost() {
-        dataSource.deleteData();
+    @Override
+    public void update(Post entity) {
+        String SQL = "UPDATE posts SET content = ?, updated = ? WHERE id = ?";
+        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
+            preparedStatement.setString(1, entity.content());
+            preparedStatement.setTimestamp(2, entity.updated());
+            preparedStatement.setLong(3, entity.id());
+            preparedStatement.executeUpdate();
+
+            dataAccess.releaseConnection(preparedStatement.getConnection());
+        }catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Post> read() {
+        String SQL = "SELECT * FROM posts";
+        List<Post> posts = new ArrayList<>();
+        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                posts.add(
+                        new Post(
+                                resultSet.getLong(1),
+                                resultSet.getString(2),
+                                resultSet.getTimestamp(3),
+                                resultSet.getTimestamp(4),
+                                new LabelRepository().labelsOfThePost(resultSet.getLong(1))));
+            }
+            dataAccess.releaseConnection(preparedStatement.getConnection());
+        }catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return posts;
+    }
+
+    private void addLabelsToPost(Post entity, long currentId) {
+        LabelRepository labelRepository = new LabelRepository(new Post(currentId, entity.content(), entity.created(), entity.updated(), entity.labels()));
+        for(Label label : entity.labels())
+            labelRepository.add(label);
     }
 }

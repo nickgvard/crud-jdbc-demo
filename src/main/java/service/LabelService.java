@@ -3,6 +3,8 @@ package service;
 import model.entity.Label;
 import repository.LabelRepository;
 
+import java.util.List;
+
 /**
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
@@ -10,26 +12,20 @@ import repository.LabelRepository;
 public class LabelService {
 
     private LabelRepository labelRepository;
-    private final Label label;
 
-    public LabelService(final Label label) {
-        this.label = label;
-        labelRepository = new LabelRepository(label);
+    public LabelService() {
+        labelRepository = new LabelRepository();
     }
 
-    public void createLabel() {
-        labelRepository.createLabel();
+    public void update(Label label) {
+        labelRepository.update(label);
     }
 
-    public Label label() {
-        return labelRepository.label();
+    public void delete(Label label) {
+        labelRepository.remove(label);
     }
 
-    public void updateLabel() {
-        labelRepository.updateLabel();
-    }
-
-    public void deleteLabel() {
-        labelRepository.deleteLabel();
+    public List<Label> read() {
+        return labelRepository.read();
     }
 }
