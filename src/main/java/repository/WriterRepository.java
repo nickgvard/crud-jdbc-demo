@@ -7,12 +7,12 @@ import utils.database.DataBaseSource;
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
  */
-public class WriterRepository {
+public class WriterRepo {
 
     private final Writer writer;
     private final DataBaseSource dataSource;
 
-    public WriterRepository(Writer writer) {
+    public WriterRepo(Writer writer) {
         this.writer = writer;
         dataSource = new DataBaseSource();
     }

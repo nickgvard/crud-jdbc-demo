@@ -7,12 +7,12 @@ import utils.database.DataBaseSource;
  * @author Nikita Gvardeev 01.11.2021
  * email gvardeev@po-korf.ru
  */
-public class PostRepository {
+public class PostRepo {
 
     private final Post post;
     private final DataBaseSource dataSource;
 
-    public PostRepository(Post post) {
+    public PostRepo(Post post) {
         this.post = post;
         dataSource = new DataBaseSource();
     }
