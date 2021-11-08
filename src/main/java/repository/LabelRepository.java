@@ -43,9 +43,9 @@ public class LabelRepository implements Repository<Label> {
 
     @Override
     public void remove(Label entity) {
-        String SQL = "DELETE FROM labels WHERE Name = ?";
+        String SQL = "DELETE FROM labels WHERE LabelId = ?";
         try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL, true)){
-            preparedStatement.setString(1, entity.name());
+            preparedStatement.setLong(1, entity.id());
             preparedStatement.executeUpdate();
 
             dataAccess.releaseConnection(preparedStatement.getConnection());

@@ -57,7 +57,7 @@ public class PostRepository implements Repository<Post> {
 
     @Override
     public void remove(Post entity) {
-        String SQL = "DELETE FROM posts WHERE id = ?";
+        String SQL = "DELETE FROM posts WHERE PostId = ?";
         try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
             preparedStatement.setLong(1, entity.id());
             preparedStatement.executeUpdate();

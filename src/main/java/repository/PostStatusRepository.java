@@ -26,14 +26,10 @@ public class PostStatusRepository implements Repository<PostStatus> {
     public void add(PostStatus entity) { }
 
     @Override
-    public void remove(PostStatus entity) {
-
-    }
+    public void remove(PostStatus entity) { }
 
     @Override
-    public void update(PostStatus entity) {
-
-    }
+    public void update(PostStatus entity) { }
 
     @Override
     public List<PostStatus> read() {
