@@ -12,8 +12,8 @@ import java.util.List;
  */
 public class WriterStatement {
 
-    private WriterService writerService;
-    private WriterView writerView;
+    private final WriterService writerService;
+    private final WriterView writerView;
 
     public WriterStatement() {
         writerService = new WriterService();

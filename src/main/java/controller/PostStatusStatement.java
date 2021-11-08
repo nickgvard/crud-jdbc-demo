@@ -2,6 +2,7 @@ package controller;
 
 import model.enums.PostStatus;
 import service.PostStatusService;
+import view.PostStatusView;
 
 import java.util.List;
 
@@ -11,27 +12,27 @@ import java.util.List;
  */
 public class PostStatusStatement {
 
-    private final PostStatus postStatus;
     private final PostStatusService statusService;
+    private final PostStatusView statusView;
 
-    public PostStatusStatement(PostStatus postStatus) {
-        this.postStatus = postStatus;
-        statusService = new PostStatusService(postStatus);
+    public PostStatusStatement() {
+        statusService = new PostStatusService();
+        statusView = new PostStatusView();
     }
 
-    public void create() {
-        statusService.create();
+    public void update(PostStatus entity) {
+        statusService.update(entity);
     }
 
-    public void update() {
-        statusService.update();
-    }
-
-    public void delete() {
-        statusService.delete();
+    public void delete(PostStatus entity) {
+        statusService.delete(entity);
     }
 
     public List<PostStatus> read() {
         return statusService.read();
+    }
+
+    public void updatePostStatusView() {
+        statusView.showAllPostStatus(read());
     }
 }

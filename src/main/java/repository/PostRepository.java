@@ -70,7 +70,7 @@ public class PostRepository implements Repository<Post> {
 
     @Override
     public void update(Post entity) {
-        String SQL = "UPDATE posts SET content = ?, updated = ? WHERE id = ?";
+        String SQL = "UPDATE posts SET Content = ?, Updated = ? WHERE PostId = ?";
         try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
             preparedStatement.setString(1, entity.content());
             preparedStatement.setTimestamp(2, entity.updated());
@@ -93,9 +93,9 @@ public class PostRepository implements Repository<Post> {
                 posts.add(
                         new Post(
                                 resultSet.getLong(1),
-                                resultSet.getString(2),
-                                resultSet.getTimestamp(3),
-                                resultSet.getTimestamp(4),
+                                resultSet.getString(4),
+                                resultSet.getTimestamp(5),
+                                resultSet.getTimestamp(6),
                                 new LabelRepository().labelsOfThePost(resultSet.getLong(1))));
             }
             dataAccess.releaseConnection(preparedStatement.getConnection());

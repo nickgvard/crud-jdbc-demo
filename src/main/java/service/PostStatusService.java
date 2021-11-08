@@ -11,27 +11,21 @@ import java.util.List;
  */
 public class PostStatusService {
 
-    private final PostStatus postStatus;
     private PostStatusRepository statusRepository;
 
-    public PostStatusService(PostStatus postStatus) {
-        this.postStatus = postStatus;
-        statusRepository = new PostStatusRepository(postStatus);
-    }
-
-    public void create() {
-        statusRepository.add(postStatus);
+    public PostStatusService() {
+        statusRepository = new PostStatusRepository();
     }
 
     public List<PostStatus> read() {
         return statusRepository.read();
     }
 
-    public void update() {
-        statusRepository.update(postStatus);
+    public void update(PostStatus entity) {
+        statusRepository.update(entity);
     }
 
-    public void delete() {
-        statusRepository.remove(postStatus);
+    public void delete(PostStatus entity) {
+        statusRepository.remove(entity);
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class WriterView {
 
     public void showAllWriters(List<Writer> writers) {
-        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------");
         if(!writers.isEmpty()) {
             System.out.println("ALL WRITERS FROM DATA BASE");
             for (Writer writer : writers) {
@@ -27,7 +27,7 @@ public class WriterView {
                 }
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            System.out.println("-----------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------");
         }else
             System.out.println("---Writer is empty---");
     }

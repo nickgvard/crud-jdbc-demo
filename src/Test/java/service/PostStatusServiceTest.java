@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 public class PostStatusServiceTest {
 
     @Mock
-    PostStatus postStatus;
+    private PostStatus postStatus;
 
     @Mock
     private PostStatusRepository statusRepository;
@@ -35,14 +35,6 @@ public class PostStatusServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-    }
-
-    @Test
-    public void whenCreatePostStatus() {
-        doNothing().when(statusRepository).add(postStatus);
-
-        statusService.create();
-        verify(statusRepository).add(postStatus);
     }
 
     @Test
@@ -79,7 +71,7 @@ public class PostStatusServiceTest {
     public void whenUpdatePostStatus() {
         doNothing().when(statusRepository).update(postStatus);
 
-        statusService.update();
+        statusService.update(postStatus);
         verify(statusRepository).update(postStatus);
     }
 
@@ -87,7 +79,7 @@ public class PostStatusServiceTest {
     public void whenDeletePostStatus() {
         doNothing().when(statusRepository).remove(postStatus);
 
-        statusService.delete();
+        statusService.delete(postStatus);
         verify(statusRepository).remove(postStatus);
     }
 }

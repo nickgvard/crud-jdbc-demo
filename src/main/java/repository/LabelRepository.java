@@ -78,7 +78,7 @@ public class LabelRepository implements Repository<Label> {
                 labels.add(
                         new Label(
                                 resultSet.getLong(1),
-                                resultSet.getString(2)));
+                                resultSet.getString(3)));
             }
 
             dataAccess.releaseConnection(statement.getConnection());

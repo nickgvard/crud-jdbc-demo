@@ -8,7 +8,7 @@ import java.util.List;
 public class PostView {
 
     public void showAllPosts(List<Post> posts) {
-        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------");
         if(!posts.isEmpty()) {
             System.out.println("ALL POSTS FROM DATA BASE");
             for (Post post : posts) {
@@ -20,7 +20,7 @@ public class PostView {
                 }
                 System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            System.out.println("-----------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------");
         }else
             System.out.println("---Posts is empty---");
     }

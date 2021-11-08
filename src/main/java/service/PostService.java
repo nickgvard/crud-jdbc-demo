@@ -27,7 +27,7 @@ public class PostService {
     }
 
     public void update(Post post) {
-        postRepository.add(post);
+        postRepository.update(post);
     }
 
     public void delete(Post post) {

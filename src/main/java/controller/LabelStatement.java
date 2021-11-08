@@ -1,6 +1,8 @@
 package controller;
 
 import model.entity.Label;
+import model.entity.Post;
+import model.entity.Writer;
 import service.LabelService;
 import view.LabelView;
 
@@ -18,6 +20,15 @@ public class LabelStatement {
     public LabelStatement() {
         labelService = new LabelService();
         labelView = new LabelView();
+    }
+
+    public LabelStatement(Post post) {
+        labelService = new LabelService(post);
+        labelView = new LabelView();
+    }
+
+    public void create(Label entity) {
+        labelService.create(entity);
     }
 
     public void update(Label entity) {
