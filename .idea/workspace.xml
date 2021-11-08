@@ -16,65 +16,19 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f74e8ea-1840-4740-a7f4-57781116825e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/main/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/repository/interfaces/Repository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/database/ConnectionPool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/database/DataBaseAccess.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/utils/database/IConnectionPool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/LabelView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/PostStatusView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/PostView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/view/WriterView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db_connection.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/crud_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crud_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/java/service/LabelServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/java/service/LabelServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/java/service/PostServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/java/service/PostServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/java/service/PostStatusServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/java/service/PostStatusServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test/java/service/WriterServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test/java/service/WriterServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/LabelStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/LabelStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/PostStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PostStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/PostStatusStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PostStatusStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/WriterStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/WriterStatement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/entity/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/entity/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/entity/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/entity/Writer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/enums/PostStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/enums/PostStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/LabelRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/LabelRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/PostStatusRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/PostStatusRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/repository/WriterRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/repository/WriterRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/LabelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/LabelService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/PostStatusService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/PostStatusService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/WriterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/service/WriterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/database/DataBaseSource.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -89,96 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="terminal" />
-  </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.App" />
-      <module name="crud_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LabelServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="crud_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.LabelServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LabelServiceTest.whenReadLabelAndEqFields" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="crud_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.LabelServiceTest" />
-      <option name="METHOD_NAME" value="whenReadLabelAndEqFields" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostServiceTest.whenReadPostsAndEqFields" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="crud_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.PostServiceTest" />
-      <option name="METHOD_NAME" value="whenReadPostsAndEqFields" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WriterServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="crud_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="service" />
-      <option name="MAIN_CLASS_NAME" value="service.WriterServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.App" />
-        <item itemvalue="JUnit.LabelServiceTest.whenReadLabelAndEqFields" />
-        <item itemvalue="JUnit.PostServiceTest.whenReadPostsAndEqFields" />
-        <item itemvalue="JUnit.WriterServiceTest" />
-        <item itemvalue="JUnit.LabelServiceTest" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -192,12 +57,6 @@
       <updated>1635837489476</updated>
       <workItem from="1635837498833" duration="386000" />
       <workItem from="1635837906353" duration="875000" />
-      <workItem from="1636037005082" duration="5177000" />
-      <workItem from="1636107762027" duration="10797000" />
-      <workItem from="1636126509981" duration="2637000" />
-      <workItem from="1636183436056" duration="909000" />
-      <workItem from="1636188378946" duration="25255000" />
-      <workItem from="1636277139957" duration="24368000" />
     </task>
     <servers />
   </component>
@@ -209,19 +68,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -229,89 +76,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="440" y="94" key="#Project_Structure" timestamp="1636201034690">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser" timestamp="1635838184740">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="440" y="94" key="#Project_Structure/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636201034690" />
-    <state x="349" y="361" key="#SQL_Dialects" timestamp="1636191803681">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="349" y="361" key="#SQL_Dialects/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636191803681" />
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636197817294">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636197817294" />
-    <state x="776" y="168" key="#com.intellij.ide.util.MemberChooser" timestamp="1636305413811">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state x="776" y="168" key="#com.intellij.ide.util.MemberChooser/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636305413811" />
-    <state x="718" y="162" key="#com.intellij.ide.util.MemberChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636223535876" />
-    <state x="2638" y="162" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636128691582" />
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1635838184740" />
-    <state x="2629" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1636108106765">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1635837513042">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="2629" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636108106765" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1636212810601">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636212810601" />
-    <state x="2610" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636107970459" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1636201054502">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636201054502" />
-    <state x="2660" y="275" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636027975841" />
-    <state width="1784" height="412" key="GridCell.Tab.0.bottom" timestamp="1636305745772">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="412" key="GridCell.Tab.0.bottom/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636305745772" />
-    <state width="1877" height="270" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636125720966" />
-    <state width="1784" height="412" key="GridCell.Tab.0.center" timestamp="1636305745772">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="412" key="GridCell.Tab.0.center/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636305745772" />
-    <state width="1877" height="270" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636125720966" />
-    <state width="1784" height="412" key="GridCell.Tab.0.left" timestamp="1636305745772">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="412" key="GridCell.Tab.0.left/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636305745772" />
-    <state width="1877" height="270" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636125720966" />
-    <state width="1784" height="412" key="GridCell.Tab.0.right" timestamp="1636305745772">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="412" key="GridCell.Tab.0.right/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636305745772" />
-    <state width="1877" height="270" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636125720966" />
-    <state width="1784" height="355" key="GridCell.Tab.1.bottom" timestamp="1636300385931">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="355" key="GridCell.Tab.1.bottom/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636300385931" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636028179078" />
-    <state width="1784" height="355" key="GridCell.Tab.1.center" timestamp="1636300385931">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="355" key="GridCell.Tab.1.center/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636300385931" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636028179078" />
-    <state width="1784" height="355" key="GridCell.Tab.1.left" timestamp="1636300385931">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="355" key="GridCell.Tab.1.left/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636300385931" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636028179078" />
-    <state width="1784" height="355" key="GridCell.Tab.1.right" timestamp="1636300385931">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state width="1784" height="355" key="GridCell.Tab.1.right/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636300385931" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636028179078" />
-    <state x="2410" y="175" key="Maven.ArtifactSearchDialog" timestamp="1636027955808">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2410" y="175" key="Maven.ArtifactSearchDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636027955808" />
-    <state x="422" y="75" key="SettingsEditor" timestamp="1636281259500">
-      <screen x="93" y="0" width="1827" height="1080" />
-    </state>
-    <state x="422" y="75" key="SettingsEditor/-1846.0.1462.864/93.0.1827.1080@93.0.1827.1080" timestamp="1636281259500" />
-    <state x="346" y="72" key="SettingsEditor/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1636201063023" />
-    <state x="2266" y="72" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636128511585" />
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1635837513042" />
   </component>
 </project>
