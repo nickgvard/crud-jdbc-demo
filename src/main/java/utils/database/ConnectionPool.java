@@ -26,9 +26,9 @@ public class ConnectionPool implements IConnectionPool {
         MAX_POOL_SIZE = 10;
         try {
             try {
-                PROPERTIES.load(new FileInputStream("src/main/resources/db_connection.properties"));
+                PROPERTIES.load(new FileInputStream("src/main/resources/db/migration/db.properties"));
                 //preset pool size
-                MAX_POOL_SIZE = Integer.parseInt(PROPERTIES.getProperty("pool.maxsize"));
+                MAX_POOL_SIZE = Integer.parseInt(PROPERTIES.getProperty("maxpoolsize"));
             } catch (IOException | NumberFormatException exception) {
                 exception.printStackTrace();
             }
@@ -80,6 +80,6 @@ public class ConnectionPool implements IConnectionPool {
     }
 
     private static Connection createdConnection() throws SQLException {
-        return DriverManager.getConnection(PROPERTIES.getProperty("url2"), PROPERTIES.getProperty("user"), PROPERTIES.getProperty("pass"));
+        return DriverManager.getConnection(PROPERTIES.getProperty("url"), PROPERTIES.getProperty("username"), PROPERTIES.getProperty("password"));
     }
 }
