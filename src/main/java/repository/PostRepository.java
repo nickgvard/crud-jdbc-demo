@@ -32,7 +32,7 @@ public class PostRepository implements Repository<Post> {
     @Override
     public void add(Post entity) {
         String SQL = "INSERT INTO posts(Content, Created, PostStatusId, WriterId) VALUES (?,?,?,?)";
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
+        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL, false)){
             preparedStatement.setString(1, entity.content());
             preparedStatement.setTimestamp(2, entity.created());
             preparedStatement.setLong(3, PostStatus.UNDER_REVIEW.statusId());
@@ -46,7 +46,7 @@ public class PostRepository implements Repository<Post> {
             else
                 throw new RuntimeException("Creating failed");
 
-            addLabelsToPost(entity, currentId);
+            addLabelsToPost(preparedStatement.getConnection(), entity, currentId);
 
             resultSet.close();
             dataAccess.releaseConnection(preparedStatement.getConnection());
@@ -105,8 +105,8 @@ public class PostRepository implements Repository<Post> {
         return posts;
     }
 
-    private void addLabelsToPost(Post entity, long currentId) {
-        LabelRepository labelRepository = new LabelRepository(new Post(currentId, entity.content(), entity.created(), entity.updated(), entity.labels()));
+    private void addLabelsToPost(Connection connection, Post entity, long currentId) {
+        LabelRepository labelRepository = new LabelRepository(new Post(currentId, entity.content(), entity.created(), entity.updated(), entity.labels()), connection);
         for(Label label : entity.labels())
             labelRepository.add(label);
     }

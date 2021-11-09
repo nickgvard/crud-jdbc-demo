@@ -17,6 +17,13 @@ public class LabelRepository implements Repository<Label> {
 
     private final DataBaseAccess dataAccess;
     private Post post;
+    private Connection connection;
+
+    public LabelRepository(Post post, Connection connection) {
+        this.post = post;
+        this.connection = connection;
+        dataAccess = new DataBaseAccess();
+    }
 
     public LabelRepository(Post post) {
         this.post = post;
@@ -30,14 +37,19 @@ public class LabelRepository implements Repository<Label> {
     @Override
     public void add(Label entity) {
         String SQL = "INSERT INTO labels(Name, PostId) VALUES (?,?)";
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL);){
             preparedStatement.setString(1, entity.name());
             preparedStatement.setLong(2, post.id());
             preparedStatement.executeUpdate();
 
+            connection.commit();
             dataAccess.releaseConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            try {
+                connection.rollback();
+            }catch (SQLException exRollback) {
+                exception.printStackTrace();
+            }
         }
     }
 

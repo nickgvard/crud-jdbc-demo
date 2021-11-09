@@ -24,9 +24,6 @@ import static org.mockito.Mockito.*;
 public class PostStatusServiceTest {
 
     @Mock
-    private PostStatus postStatus;
-
-    @Mock
     private PostStatusRepository statusRepository;
 
     @InjectMocks
@@ -65,21 +62,5 @@ public class PostStatusServiceTest {
         List<PostStatus> actual = statusService.read();
 
         assertEquals(expected, actual.get(0));
-    }
-
-    @Test
-    public void whenUpdatePostStatus() {
-        doNothing().when(statusRepository).update(postStatus);
-
-        statusService.update(postStatus);
-        verify(statusRepository).update(postStatus);
-    }
-
-    @Test
-    public void whenDeletePostStatus() {
-        doNothing().when(statusRepository).remove(postStatus);
-
-        statusService.delete(postStatus);
-        verify(statusRepository).remove(postStatus);
     }
 }
