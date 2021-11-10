@@ -10,10 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Nikita Gvardeev 01.11.2021
- * email gvardeev@po-korf.ru
- */
 public class PostStatusRepository implements Repository<PostStatus> {
 
     private final DataBaseAccess dataSource;

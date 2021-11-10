@@ -11,10 +11,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Nikita Gvardeev 01.11.2021
- * email gvardeev@po-korf.ru
- */
 public class PostRepository implements Repository<Post> {
 
     private final DataBaseAccess dataAccess;

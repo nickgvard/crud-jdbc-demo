@@ -11,10 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Nikita Gvardeev 01.11.2021
- * email gvardeev@po-korf.ru
- */
 public class WriterRepository implements Repository<Writer> {
 
     private final DataBaseAccess dataAccess;

@@ -3,10 +3,6 @@ package model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Nikita Gvardeev 01.11.2021
- * email gvardeev@po-korf.ru
- */
 public class Writer extends BaseEntity {
 
     private final String firstName;

@@ -16,10 +16,6 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-/**
- * @author Nikita Gvardeev 02.11.2021
- * email gvardeev@po-korf.ru
- */
 @RunWith(MockitoJUnitRunner.class)
 public class PostStatusServiceTest {
 

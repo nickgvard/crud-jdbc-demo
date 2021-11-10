@@ -4,10 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Nikita Gvardeev 01.11.2021
- * email gvardeev@po-korf.ru
- */
 public class Post extends BaseEntity {
 
     private final String content;
