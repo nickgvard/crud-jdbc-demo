@@ -49,7 +49,7 @@ public class PostRepository implements Repository<Post> {
             addLabelsToPost(preparedStatement.getConnection(), entity, currentId);
 
             resultSet.close();
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class PostRepository implements Repository<Post> {
             preparedStatement.setLong(1, entity.id());
             preparedStatement.executeUpdate();
 
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -77,7 +77,7 @@ public class PostRepository implements Repository<Post> {
             preparedStatement.setLong(3, entity.id());
             preparedStatement.executeUpdate();
 
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -98,7 +98,8 @@ public class PostRepository implements Repository<Post> {
                                 resultSet.getTimestamp(6),
                                 new LabelRepository().labelsOfThePost(resultSet.getLong(1))));
             }
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }

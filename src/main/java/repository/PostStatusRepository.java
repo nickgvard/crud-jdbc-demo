@@ -41,7 +41,8 @@ public class PostStatusRepository implements Repository<PostStatus> {
                 String postStatus = resultSet.getString(2).toUpperCase().replaceAll("\\s", "_");
                 postStatuses.add(PostStatus.valueOf(postStatus));
             }
-            dataSource.releaseConnection(statement.getConnection());
+
+            dataSource.returnConnection(statement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }

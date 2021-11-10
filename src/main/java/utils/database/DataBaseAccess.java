@@ -36,7 +36,7 @@ public class DataBaseAccess {
         }
     }
 
-    public void releaseConnection(Connection connection) {
-        ConnectionPool.pool().release(connection);
+    public void returnConnection(Connection connection) {
+        ConnectionPool.pool().retrieve(connection);
     }
 }

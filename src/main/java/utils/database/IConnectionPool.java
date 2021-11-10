@@ -6,6 +6,6 @@ import java.sql.SQLException;
 public interface IConnectionPool {
 
     Connection connection() throws SQLException;
-    void release(Connection connection);
+    void retrieve(Connection connection);
     void releaseAll() throws SQLException;
 }

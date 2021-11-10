@@ -43,7 +43,8 @@ public class LabelRepository implements Repository<Label> {
             preparedStatement.executeUpdate();
 
             connection.commit();
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+
+            dataAccess.returnConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
             try {
                 connection.rollback();
@@ -60,7 +61,7 @@ public class LabelRepository implements Repository<Label> {
             preparedStatement.setLong(1, entity.id());
             preparedStatement.executeUpdate();
 
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -74,7 +75,7 @@ public class LabelRepository implements Repository<Label> {
             preparedStatement.setLong(2, entity.id());
             preparedStatement.executeUpdate();
 
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -93,7 +94,7 @@ public class LabelRepository implements Repository<Label> {
                                 resultSet.getString(3)));
             }
 
-            dataAccess.releaseConnection(statement.getConnection());
+            dataAccess.returnConnection(statement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -113,8 +114,9 @@ public class LabelRepository implements Repository<Label> {
                                 resultSet.getLong(1),
                                 resultSet.getString(2)));
             }
+
             resultSet.close();
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }

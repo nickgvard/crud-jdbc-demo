@@ -14,7 +14,7 @@ public class ConnectionPool implements IConnectionPool {
     private static List<Connection> connectionPool;
     private static List<Connection> usedConnection;
     private final static Properties PROPERTIES;
-    private static int MAX_POOL_SIZE;
+    private static int POOL_SIZE;
 
     private static final ConnectionPool INSTANCE = new ConnectionPool();
 
@@ -23,21 +23,21 @@ public class ConnectionPool implements IConnectionPool {
     static {
         PROPERTIES = new Properties();
         //default pool size
-        MAX_POOL_SIZE = 10;
+        POOL_SIZE = 10;
         try {
             try {
                 PROPERTIES.load(new FileInputStream("src/main/resources/db/migration/db.properties"));
                 //preset pool size
-                MAX_POOL_SIZE = Integer.parseInt(PROPERTIES.getProperty("maxpoolsize"));
+                POOL_SIZE = Integer.parseInt(PROPERTIES.getProperty("maxpoolsize"));
             } catch (IOException | NumberFormatException exception) {
                 exception.printStackTrace();
             }
-            connectionPool = new ArrayList<>(MAX_POOL_SIZE);
+            connectionPool = new ArrayList<>(POOL_SIZE);
             usedConnection = new ArrayList<>();
 
-            for (int i = 0; i < MAX_POOL_SIZE; i++) {
+            for (int i = 0; i < POOL_SIZE; i++)
                 connectionPool.add(createdConnection());
-            }
+
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -50,9 +50,9 @@ public class ConnectionPool implements IConnectionPool {
     @Override
     public Connection connection() throws SQLException {
         if(connectionPool.isEmpty()) {
-            if (usedConnection.size() < MAX_POOL_SIZE) {
+            if (usedConnection.size() < POOL_SIZE)
                 connectionPool.add(createdConnection());
-            } else
+            else
                 throw new RuntimeException("Max pool size achieved");
         }
 
@@ -63,7 +63,7 @@ public class ConnectionPool implements IConnectionPool {
     }
 
     @Override
-    public void release(Connection connection) {
+    public void retrieve(Connection connection) {
         try {
             if(connection.isClosed())
                 connection = createdConnection();

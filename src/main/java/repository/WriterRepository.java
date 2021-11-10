@@ -30,14 +30,8 @@ public class WriterRepository implements Repository<Writer> {
             preparedStatement.setString(1, entity.firstName());
             preparedStatement.setString(2, entity.lastName());
             preparedStatement.executeUpdate();
-//            ResultSet resultSet = preparedStatement.getGeneratedKeys();
-//            long id;
-//            if(resultSet.next())
-//                id = resultSet.getLong(1);
-//            else
-//                throw new RuntimeException("Creating failed");
-//            resultSet.close();
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+
+            dataAccess.returnConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -50,7 +44,7 @@ public class WriterRepository implements Repository<Writer> {
             preparedStatement.setLong(1, entity.id());
             preparedStatement.executeUpdate();
 
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -65,7 +59,7 @@ public class WriterRepository implements Repository<Writer> {
             preparedStatement.setLong(3, entity.id());
             preparedStatement.executeUpdate();
 
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -85,7 +79,7 @@ public class WriterRepository implements Repository<Writer> {
                                 resultSet.getString(3),
                                 postsOfTheWriter(resultSet.getLong(1))));
             }
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
@@ -109,7 +103,7 @@ public class WriterRepository implements Repository<Writer> {
                                 new LabelRepository().labelsOfThePost(resultSet.getLong(1))));
             }
             resultSet.close();
-            dataAccess.releaseConnection(preparedStatement.getConnection());
+            dataAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
