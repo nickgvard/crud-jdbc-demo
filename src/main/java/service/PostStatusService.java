@@ -1,16 +1,16 @@
 package service;
 
-import model.enums.PostStatus;
-import repository.PostStatusRepository;
+import enums.PostStatus;
+import repository.jdbc_impl.JDBCPostStatusRepositoryImpl;
 
 import java.util.List;
 
 public class PostStatusService {
 
-    private PostStatusRepository statusRepository;
+    private JDBCPostStatusRepositoryImpl statusRepository;
 
     public PostStatusService() {
-        statusRepository = new PostStatusRepository();
+        statusRepository = new JDBCPostStatusRepositoryImpl();
     }
 
     public List<PostStatus> read() {
@@ -22,6 +22,6 @@ public class PostStatusService {
     }
 
     public void delete(PostStatus entity) {
-        statusRepository.remove(entity);
+        statusRepository.deleteById(entity);
     }
 }

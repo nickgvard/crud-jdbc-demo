@@ -10,7 +10,6 @@ public class Label extends BaseEntity {
     }
 
     public Label(String name) {
-        super(0L);
         this.name = name;
     }
 

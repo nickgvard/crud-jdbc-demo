@@ -1,25 +1,25 @@
 package application;
 
-import controller.LabelStatement;
-import controller.PostStatement;
-import controller.PostStatusStatement;
-import controller.WriterStatement;
+import controller.LabelController;
+import controller.PostController;
+import controller.PostStatusController;
+import controller.WriterController;
 
 public class ReadProcess extends Process {
 
     public void read(String action) {
         switch (action) {
             case "5":
-                new WriterStatement().updateWriterView();
+                new WriterController().updateWriterView();
                 break;
             case "6":
-                new PostStatement().updatePostView();
+                new PostController().updatePostView();
                 break;
             case "7":
-                new LabelStatement().updateLabelView();
+                new LabelController().updateLabelView();
                 break;
             case "8":
-                new PostStatusStatement().updatePostStatusView();
+                new PostStatusController().updatePostStatusView();
                 break;
             default:
                 throw new RuntimeException("No such action");

@@ -1,8 +1,8 @@
 package application;
 
-import controller.LabelStatement;
-import controller.PostStatement;
-import controller.WriterStatement;
+import controller.LabelController;
+import controller.PostController;
+import controller.WriterController;
 import model.entity.Label;
 import model.entity.Post;
 import model.entity.Writer;
@@ -17,17 +17,17 @@ public class UpdateProcess extends Process {
         List<Writer> writers;
         Writer selectedWriter;
         Writer newWriter;
-        WriterStatement writerStatement;
+        WriterController writerController;
         Post selectedPost;
         List<Post> posts;
-        PostStatement postStatement;
-        LabelStatement labelStatement;
+        PostController postController;
+        LabelController labelController;
 
         switch (action) {
             case "9":
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER YOU WANT TO UPDATE ****");
-                writers = new WriterStatement().read();
+                writers = new WriterController().read();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -67,11 +67,11 @@ public class UpdateProcess extends Process {
                         else
                             newWriter = new Writer(selectedWriter.id(), selectedWriter.firstName(), update, selectedWriter.posts());
                     }
-                    writerStatement = new WriterStatement();
-                    writerStatement.update(newWriter);
+                    writerController = new WriterController();
+                    writerController.update(newWriter);
                     System.out.println("****WRITER UPDATED SUCCESSFUL****\n");
 
-                    writerStatement.updateWriterView();
+                    writerController.updateWriterView();
                 }else
                     System.out.println("--- writers is empty, please add the writer ---");
                 break;
@@ -79,7 +79,7 @@ public class UpdateProcess extends Process {
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER FROM WHOM YOU WANT TO UPDATE THE POST ****");
                 String update;
-                writers = new WriterStatement().read();
+                writers = new WriterController().read();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -100,11 +100,11 @@ public class UpdateProcess extends Process {
 
                         Post updatePost = new Post(selectedPost.id(), update, selectedPost.created(), new Timestamp(System.currentTimeMillis()), selectedPost.labels());
 
-                        postStatement = new PostStatement(selectedWriter);
-                        postStatement.update(updatePost);
+                        postController = new PostController(selectedWriter);
+                        postController.update(updatePost);
                         System.out.println("****POST UPDATED SUCCESSFUL****\n");
 
-                        postStatement.updatePostView();
+                        postController.updatePostView();
                     }else
                         System.out.println("--- The posts off this writers is empty, please add post to this writer ---");
                     break;
@@ -117,7 +117,7 @@ public class UpdateProcess extends Process {
 
                 List<Label> labels;
                 Label selectedLabel;
-                writers = new WriterStatement().read();
+                writers = new WriterController().read();
 
                 if (!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -146,11 +146,11 @@ public class UpdateProcess extends Process {
                             update = scanner().nextLine();
 
                             Label updateLabel = new Label(selectedLabel.id(), update);
-                            labelStatement = new LabelStatement();
-                            labelStatement.update(updateLabel);
+                            labelController = new LabelController();
+                            labelController.update(updateLabel);
                             System.out.println("**** POST UPDATED SUCCESSFUL ****\n");
 
-                            labelStatement.updateLabelView();
+                            labelController.updateLabelView();
                         }else
                             System.out.println("--- The labels off this posts is empty, please add labels to this post ---");
                     }else

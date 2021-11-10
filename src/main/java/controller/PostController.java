@@ -7,19 +7,16 @@ import view.PostView;
 
 import java.util.List;
 
-public class PostStatement {
+public class PostController {
 
     private final PostService postService;
-    private final PostView postView;
 
-    public PostStatement(Writer writer) {
+    public PostController(Writer writer) {
         postService = new PostService(writer);
-        postView = new PostView();
     }
 
-    public PostStatement() {
+    public PostController() {
         postService = new PostService();
-        postView = new PostView();
     }
 
     public void create(Post entity) {

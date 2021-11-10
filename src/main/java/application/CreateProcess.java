@@ -1,8 +1,8 @@
 package application;
 
-import controller.LabelStatement;
-import controller.PostStatement;
-import controller.WriterStatement;
+import controller.LabelController;
+import controller.PostController;
+import controller.WriterController;
 import model.entity.Label;
 import model.entity.Post;
 import model.entity.Writer;
@@ -25,19 +25,19 @@ public class CreateProcess extends Process {
                 String writerLastName = scanner().nextLine();
 
                 Writer newWriter = new Writer(writerName, writerLastName);
-                WriterStatement writerStatement = new WriterStatement();
+                WriterController writerController = new WriterController();
 
-                writerStatement.create(newWriter);
+                writerController.create(newWriter);
                 System.out.println("**** WRITER ADDED SUCCESSFUL ****\n");
-                writerStatement.updateWriterView();
+                writerController.updateWriterView();
                 break;
             case "2":
                 System.out.println("-----------------------------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER, YOU WANT TO POST ADD ****");
-                List<Writer> writers = new WriterStatement().read();
+                List<Writer> writers = new WriterController().read();
                 Writer selectedWriter;
                 Label newLabel;
-                PostStatement postStatement;
+                PostController postController;
 
                 if (!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -55,20 +55,20 @@ public class CreateProcess extends Process {
                     newPost.addLabel(newLabel);
                     selectedWriter.addPost(newPost);
 
-                    postStatement = new PostStatement(selectedWriter);
-                    postStatement.create(newPost);
+                    postController = new PostController(selectedWriter);
+                    postController.create(newPost);
                     System.out.println("**** POST ADDED SUCCESSFUL ****\n");
-                    postStatement.updatePostView();
+                    postController.updatePostView();
                 } else
                     System.out.println("--- writers is empty, please add the writer ---");
                 break;
             case "3":
                 System.out.println("-----------------------------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER, YOU WANT TO LABEL ADD ****");
-                writers = new WriterStatement().read();
+                writers = new WriterController().read();
                 List<Post> posts;
                 Post selectedPost;
-                LabelStatement labelStatement;
+                LabelController labelController;
 
                 if (!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -92,11 +92,11 @@ public class CreateProcess extends Process {
 
                     newLabel = new Label(scanner().nextLine());
                     selectedPost.addLabel(newLabel);
-                    labelStatement = new LabelStatement(selectedPost);
-                    labelStatement.create(newLabel);
+                    labelController = new LabelController(selectedPost);
+                    labelController.create(newLabel);
                     System.out.println("**** LABEL ADDED SUCCESSFUL ****\n");
 
-                    labelStatement.updateLabelView();
+                    labelController.updateLabelView();
                 } else
                     System.out.println("--- writers is empty, please add the writer ---");
                 break;

@@ -1,8 +1,8 @@
 package application;
 
-import controller.LabelStatement;
-import controller.PostStatement;
-import controller.WriterStatement;
+import controller.LabelController;
+import controller.PostController;
+import controller.WriterController;
 import model.entity.Label;
 import model.entity.Post;
 import model.entity.Writer;
@@ -12,33 +12,33 @@ import java.util.List;
 public class DeleteProcess extends Process {
 
     public void delete(String action) {
-        WriterStatement writerStatement;
+        WriterController writerController;
         List<Writer> writers;
         Writer selectedWriter;
         List<Post> posts;
         Post selectedPost;
-        PostStatement postStatement;
+        PostController postController;
         List<Label> labels;
         Label selectedLabel;
-        LabelStatement labelStatement;
+        LabelController labelController;
 
         switch (action) {
             case "12":
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER YOU WANT TO DELETE ****");
 
-                writerStatement = new WriterStatement();
-                writers = writerStatement.read();
+                writerController = new WriterController();
+                writers = writerController.read();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
                         System.out.println(writers.get(j).firstName() + " " + writers.get(j).lastName() + " (" + (j + 1) + ")");
                     selectedWriter = writers.get(Integer.parseInt(scanner().nextLine()) - 1);
 
-                    writerStatement.delete(selectedWriter);
+                    writerController.delete(selectedWriter);
                     System.out.println("**** WRITER DELETED SUCCESSFUL ****\n");
 
-                    writerStatement.updateWriterView();
+                    writerController.updateWriterView();
                 }else
                     System.out.println("--- writers is empty, please add the writer ---");
                 break;
@@ -46,7 +46,7 @@ public class DeleteProcess extends Process {
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER FROM WHOM YOU WANT TO DELETE THE POST ****");
 
-                writers = new WriterStatement().read();
+                writers = new WriterController().read();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -62,11 +62,11 @@ public class DeleteProcess extends Process {
 
                         selectedPost = posts.get(Integer.parseInt(scanner().nextLine()) - 1);
 
-                        postStatement = new PostStatement();
-                        postStatement.delete(selectedPost);
+                        postController = new PostController();
+                        postController.delete(selectedPost);
                         System.out.println("**** POST DELETED SUCCESSFUL ****\n");
 
-                        postStatement.updatePostView();
+                        postController.updatePostView();
                     }else
                         System.out.println("--- The posts off this writers is empty, please add post to this writer ---");
                 }else
@@ -76,7 +76,7 @@ public class DeleteProcess extends Process {
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER FROM WHOM YOU WANT TO DELETE THE LABEL ****");
 
-                writers = new WriterStatement().read();
+                writers = new WriterController().read();
 
                 if (!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -102,11 +102,11 @@ public class DeleteProcess extends Process {
 
                             selectedLabel = labels.get(Integer.parseInt(scanner().nextLine()) - 1);
 
-                            labelStatement = new LabelStatement();
-                            labelStatement.delete(selectedLabel);
+                            labelController = new LabelController();
+                            labelController.delete(selectedLabel);
                             System.out.println("**** POST DELETED SUCCESSFUL ****\n");
 
-                            labelStatement.updateLabelView();
+                            labelController.updateLabelView();
                         }else
                             System.out.println("--- The labels off this posts is empty, please add labels to this post ---");
                     }else

@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.PostRepository;
+import repository.jdbc_impl.JDBCPostRepositoryImpl;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ public class PostServiceTest {
     private Post post;
 
     @Mock
-    private PostRepository mockPostRepository;
+    private JDBCPostRepositoryImpl mockPostRepository;
 
     @InjectMocks
     private PostService postService;
@@ -61,10 +61,10 @@ public class PostServiceTest {
 
     @Test
     public void whenDeletePost() {
-        doNothing().when(mockPostRepository).remove(post);
+        doNothing().when(mockPostRepository).deleteById(post);
         postService.delete(post);
 
-        verify(mockPostRepository, times(1)).remove(post);
+        verify(mockPostRepository, times(1)).deleteById(post);
     }
 
     private Post post() {

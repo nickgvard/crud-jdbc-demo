@@ -20,7 +20,6 @@ public class Post extends BaseEntity {
     }
 
     public Post(String content, Timestamp created, List<Label> labels) {
-        super(0L);
         this.content = content;
         this.created = created;
         this.labels = labels;

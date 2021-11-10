@@ -1,4 +1,4 @@
-package model.enums;
+package enums;
 
 public enum PostStatus {
     ACTIVE(1), UNDER_REVIEW(2), DELETED(3);

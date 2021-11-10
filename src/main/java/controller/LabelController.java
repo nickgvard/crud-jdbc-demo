@@ -2,25 +2,20 @@ package controller;
 
 import model.entity.Label;
 import model.entity.Post;
-import model.entity.Writer;
 import service.LabelService;
-import view.LabelView;
 
 import java.util.List;
 
-public class LabelStatement {
+public class LabelController {
 
     private final LabelService labelService;
-    private final LabelView labelView;
 
-    public LabelStatement() {
+    public LabelController() {
         labelService = new LabelService();
-        labelView = new LabelView();
     }
 
-    public LabelStatement(Post post) {
+    public LabelController(Post post) {
         labelService = new LabelService(post);
-        labelView = new LabelView();
     }
 
     public void create(Label entity) {

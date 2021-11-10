@@ -6,6 +6,8 @@ import java.util.List;
 
 public class LabelView {
 
+    private
+
     public void showAllLabels(List<Label> labels) {
         System.out.println("----------------------------------------------------");
         if(!labels.isEmpty()) {

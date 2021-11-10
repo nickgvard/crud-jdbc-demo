@@ -6,14 +6,12 @@ import view.WriterView;
 
 import java.util.List;
 
-public class WriterStatement {
+public class WriterController {
 
     private final WriterService writerService;
-    private final WriterView writerView;
 
-    public WriterStatement() {
+    public WriterController() {
         writerService = new WriterService();
-        writerView = new WriterView();
     }
 
     public void create(Writer entity) {

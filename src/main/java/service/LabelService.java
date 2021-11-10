@@ -2,24 +2,24 @@ package service;
 
 import model.entity.Label;
 import model.entity.Post;
-import repository.LabelRepository;
+import repository.jdbc_impl.JDBCLabelRepositoryImpl;
 
 import java.util.List;
 
 public class LabelService {
 
-    private LabelRepository labelRepository;
+    private JDBCLabelRepositoryImpl labelRepository;
 
     public LabelService() {
-        labelRepository = new LabelRepository();
+        labelRepository = new JDBCLabelRepositoryImpl();
     }
 
     public LabelService(Post post) {
-        labelRepository = new LabelRepository(post);
+        labelRepository = new JDBCLabelRepositoryImpl(post);
     }
 
     public void create(Label label) {
-        labelRepository.add(label);
+        labelRepository.save(label);
     }
 
     public void update(Label label) {
@@ -27,7 +27,7 @@ public class LabelService {
     }
 
     public void delete(Label label) {
-        labelRepository.remove(label);
+        labelRepository.deleteById(label);
     }
 
     public List<Label> read() {

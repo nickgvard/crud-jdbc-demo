@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.LabelRepository;
+import repository.jdbc_impl.JDBCLabelRepositoryImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,7 +23,7 @@ public class LabelServiceTest {
     private Label label;
 
     @Mock
-    private LabelRepository mockLabelRepository;
+    private JDBCLabelRepositoryImpl mockLabelRepository;
 
     @InjectMocks
     private LabelService labelService;
@@ -56,10 +56,10 @@ public class LabelServiceTest {
 
     @Test
     public void whenDeleteLabel() {
-        doNothing().when(mockLabelRepository).remove(label);
+        doNothing().when(mockLabelRepository).deleteById(label);
         labelService.delete(label);
 
-        verify(mockLabelRepository, times(1)).remove(label);
+        verify(mockLabelRepository, times(1)).deleteById(label);
     }
 
     private Label label() {

@@ -2,24 +2,24 @@ package service;
 
 import model.entity.Post;
 import model.entity.Writer;
-import repository.PostRepository;
+import repository.jdbc_impl.JDBCPostRepositoryImpl;
 
 import java.util.List;
 
 public class PostService {
 
-    private PostRepository postRepository;
+    private JDBCPostRepositoryImpl postRepository;
 
     public PostService(Writer writer) {
-        postRepository = new PostRepository(writer);
+        postRepository = new JDBCPostRepositoryImpl(writer);
     }
 
     public PostService() {
-        postRepository = new PostRepository();
+        postRepository = new JDBCPostRepositoryImpl();
     }
 
     public void create(Post post) {
-        postRepository.add(post);
+        postRepository.save(post);
     }
 
     public void update(Post post) {
@@ -27,7 +27,7 @@ public class PostService {
     }
 
     public void delete(Post post) {
-        postRepository.remove(post);
+        postRepository.deleteById(post);
     }
 
     public List<Post> read() {

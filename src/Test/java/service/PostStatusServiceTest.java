@@ -1,6 +1,6 @@
 package service;
 
-import model.enums.PostStatus;
+import enums.PostStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.PostStatusRepository;
+import repository.jdbc_impl.JDBCPostStatusRepositoryImpl;
 
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class PostStatusServiceTest {
 
     @Mock
-    private PostStatusRepository statusRepository;
+    private JDBCPostStatusRepositoryImpl statusRepository;
 
     @InjectMocks
     private PostStatusService statusService;

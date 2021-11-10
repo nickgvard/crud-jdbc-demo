@@ -1,19 +1,17 @@
 package controller;
 
-import model.enums.PostStatus;
+import enums.PostStatus;
 import service.PostStatusService;
 import view.PostStatusView;
 
 import java.util.List;
 
-public class PostStatusStatement {
+public class PostStatusController {
 
     private final PostStatusService statusService;
-    private final PostStatusView statusView;
 
-    public PostStatusStatement() {
+    public PostStatusController() {
         statusService = new PostStatusService();
-        statusView = new PostStatusView();
     }
 
     public void update(PostStatus entity) {

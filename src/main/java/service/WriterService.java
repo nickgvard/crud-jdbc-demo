@@ -1,20 +1,20 @@
 package service;
 
 import model.entity.Writer;
-import repository.WriterRepository;
+import repository.jdbc_impl.JDBCWriterRepositoryImpl;
 
 import java.util.List;
 
 public class WriterService {
 
-    private WriterRepository writerRepository;
+    private JDBCWriterRepositoryImpl writerRepository;
 
     public WriterService() {
-        writerRepository = new WriterRepository();
+        writerRepository = new JDBCWriterRepositoryImpl();
     }
 
     public void create(Writer writer) {
-        writerRepository.add(writer);
+        writerRepository.save(writer);
     }
 
     public List<Writer> read() {
@@ -26,6 +26,6 @@ public class WriterService {
     }
 
     public void delete(Writer writer) {
-        writerRepository.remove(writer);
+        writerRepository.deleteById(writer);
     }
 }

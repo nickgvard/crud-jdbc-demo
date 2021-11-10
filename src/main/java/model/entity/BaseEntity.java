@@ -1,10 +1,13 @@
 package model.entity;
 
 public class BaseEntity {
-    private final long id;
+    private long id;
 
     public BaseEntity(long id) {
         this.id = id;
+    }
+
+    public BaseEntity() {
     }
 
     public long id() {

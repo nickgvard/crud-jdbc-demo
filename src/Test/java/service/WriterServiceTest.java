@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.WriterRepository;
+import repository.jdbc_impl.JDBCWriterRepositoryImpl;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +25,7 @@ public class WriterServiceTest {
     private WriterService writerService;
 
     @Mock
-    private WriterRepository mockWriterRepository;
+    private JDBCWriterRepositoryImpl mockWriterRepository;
 
     @Mock
     private Writer writer;
@@ -37,10 +37,10 @@ public class WriterServiceTest {
 
     @Test
     public void whenCreateWriter() {
-        doNothing().when(mockWriterRepository).add(writer);
+        doNothing().when(mockWriterRepository).save(writer);
 
         writerService.create(writer);
-        verify(mockWriterRepository, times(1)).add(writer);
+        verify(mockWriterRepository, times(1)).save(writer);
     }
 
     @Test
@@ -81,10 +81,10 @@ public class WriterServiceTest {
 
     @Test
     public void whenDeleteWriter() {
-        doNothing().when(mockWriterRepository).remove(writer);
+        doNothing().when(mockWriterRepository).deleteById(writer);
         writerService.delete(writer);
 
-        verify(mockWriterRepository).remove(writer);
+        verify(mockWriterRepository).deleteById(writer);
     }
 
     private Writer writer(String typeWriter) {

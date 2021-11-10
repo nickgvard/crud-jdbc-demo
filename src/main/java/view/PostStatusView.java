@@ -1,6 +1,6 @@
 package view;
 
-import model.enums.PostStatus;
+import enums.PostStatus;
 
 import java.util.List;
 
