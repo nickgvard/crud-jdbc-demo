@@ -64,6 +64,12 @@ public class ConnectionPool implements IConnectionPool {
 
     @Override
     public void release(Connection connection) {
+        try {
+            if(connection.isClosed())
+                connection = createdConnection();
+        }catch (SQLException exception) {
+            exception.printStackTrace();
+        }
         connectionPool.add(connection);
         usedConnection.remove(connection);
     }
