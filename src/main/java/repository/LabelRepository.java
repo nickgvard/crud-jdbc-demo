@@ -1,6 +1,6 @@
 package repository;
 
-import model.entity.Label;
+import model.Label;
 
 public interface LabelRepository extends GenericRepository<Label, Long> {
 

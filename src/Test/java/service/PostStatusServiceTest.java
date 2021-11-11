@@ -35,7 +35,7 @@ public class PostStatusServiceTest {
         PostStatus expected = PostStatus.ACTIVE;
         when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.ACTIVE));
 
-        List<PostStatus> actual = statusService.read();
+        List<PostStatus> actual = statusService.getAll();
 
         assertEquals(expected, actual.get(0));
     }
@@ -45,7 +45,7 @@ public class PostStatusServiceTest {
         PostStatus expected = PostStatus.DELETED;
         when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.DELETED));
 
-        List<PostStatus> actual = statusService.read();
+        List<PostStatus> actual = statusService.getAll();
 
         assertEquals(expected, actual.get(0));
     }
@@ -55,7 +55,7 @@ public class PostStatusServiceTest {
         PostStatus expected = PostStatus.UNDER_REVIEW;
         when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.UNDER_REVIEW));
 
-        List<PostStatus> actual = statusService.read();
+        List<PostStatus> actual = statusService.getAll();
 
         assertEquals(expected, actual.get(0));
     }

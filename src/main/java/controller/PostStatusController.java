@@ -2,7 +2,6 @@ package controller;
 
 import enums.PostStatus;
 import service.PostStatusService;
-import view.PostStatusView;
 
 import java.util.List;
 
@@ -14,15 +13,21 @@ public class PostStatusController {
         statusService = new PostStatusService();
     }
 
-    public void update(PostStatus entity) {
-        statusService.update(entity);
+    public PostStatus getById(long id) {
+        return statusService.getById(id);
     }
 
-    public void delete(PostStatus entity) {
-        statusService.delete(entity);
+    public List<PostStatus> getAll() {
+        return statusService.getAll();
     }
 
-    public List<PostStatus> read() {
-        return statusService.read();
+    public PostStatus update(PostStatus entity) {
+        return statusService.update(entity);
     }
+
+    public PostStatus deleteById(PostStatus entity) {
+        return statusService.deleteById(entity);
+    }
+
+
 }

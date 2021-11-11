@@ -1,7 +1,6 @@
-package model.entity;
+package model;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Post extends BaseEntity {
@@ -9,20 +8,18 @@ public class Post extends BaseEntity {
     private final String content;
     private final Timestamp created;
     private Timestamp updated;
-    private final List<Label> labels;
+    private List<Label> labels;
 
-    public Post(long id, String content, Timestamp created, Timestamp updated, List<Label> labels) {
+    public Post(String content, Timestamp created) {
+        this.content = content;
+        this.created = created;
+    }
+
+    public Post(long id, String content, Timestamp created, Timestamp updated) {
         super(id);
         this.content = content;
         this.created = created;
         this.updated = updated;
-        this.labels = labels;
-    }
-
-    public Post(String content, Timestamp created, List<Label> labels) {
-        this.content = content;
-        this.created = created;
-        this.labels = labels;
     }
 
     public String content() {

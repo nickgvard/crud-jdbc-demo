@@ -1,8 +1,8 @@
 package service;
 
-import model.entity.Label;
-import model.entity.Post;
-import model.entity.Writer;
+import model.Label;
+import model.Post;
+import model.Writer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,7 +39,7 @@ public class WriterServiceTest {
     public void whenCreateWriter() {
         doNothing().when(mockWriterRepository).save(writer);
 
-        writerService.create(writer);
+        writerService.save(writer);
         verify(mockWriterRepository, times(1)).save(writer);
     }
 
@@ -48,7 +48,7 @@ public class WriterServiceTest {
         List<Writer> expected = Collections.singletonList(writer("withoutPost"));
         when(mockWriterRepository.read()).thenReturn(Collections.singletonList(writer("withoutPost")));
 
-        List<Writer> actual = writerService.read();
+        List<Writer> actual = writerService.getAll();
         verify(mockWriterRepository, times(1)).read();
 
         assertEquals(expected.get(0).id(), actual.get(0).id());
@@ -62,7 +62,7 @@ public class WriterServiceTest {
         List<Writer> expected = Collections.singletonList(writer("withPost"));
         when(mockWriterRepository.read()).thenReturn(Collections.singletonList(writer("withPost")));
 
-        List<Writer> actual = writerService.read();
+        List<Writer> actual = writerService.getAll();
         verify(mockWriterRepository, times(1)).read();
 
         assertEquals(expected.get(0).id(), actual.get(0).id());
@@ -82,7 +82,7 @@ public class WriterServiceTest {
     @Test
     public void whenDeleteWriter() {
         doNothing().when(mockWriterRepository).deleteById(writer);
-        writerService.delete(writer);
+        writerService.deleteById(writer);
 
         verify(mockWriterRepository).deleteById(writer);
     }

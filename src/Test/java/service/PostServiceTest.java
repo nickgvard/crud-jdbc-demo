@@ -1,7 +1,7 @@
 package service;
 
-import model.entity.Label;
-import model.entity.Post;
+import model.Label;
+import model.Post;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +40,7 @@ public class PostServiceTest {
         List<Post> expected = Arrays.asList(post(), post());
         when(mockPostRepository.read()).thenReturn(Arrays.asList(post(), post()));
 
-        List<Post> actual = postService.read();
+        List<Post> actual = postService.getAll();
         verify(mockPostRepository).read();
 
         assertEquals(expected.size(), actual.size());
@@ -62,7 +62,7 @@ public class PostServiceTest {
     @Test
     public void whenDeletePost() {
         doNothing().when(mockPostRepository).deleteById(post);
-        postService.delete(post);
+        postService.deleteById(post);
 
         verify(mockPostRepository, times(1)).deleteById(post);
     }

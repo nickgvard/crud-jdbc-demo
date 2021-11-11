@@ -1,7 +1,6 @@
 package controller;
 
-import model.entity.Label;
-import model.entity.Post;
+import model.Label;
 import service.LabelService;
 
 import java.util.List;
@@ -22,15 +21,15 @@ public class LabelController {
         return labelService.getAll();
     }
 
-    public void save(Label entity) {
-        labelService.save(entity);
+    public Label save(Label label) {
+        return labelService.save(label);
     }
 
-    public void update(Label entity) {
-        labelService.update(entity);
+    public Label update(Label label) {
+        return labelService.update(label);
     }
 
-    public void delete(Label entity) {
-        labelService.deleteById(entity);
+    public Label delete(Label label) {
+        return labelService.deleteById(label);
     }
 }

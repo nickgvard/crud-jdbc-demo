@@ -1,6 +1,6 @@
 package repository;
 
-import model.entity.Writer;
+import model.Writer;
 
 public interface WriterRepository extends GenericRepository<Writer, Long> {
 }

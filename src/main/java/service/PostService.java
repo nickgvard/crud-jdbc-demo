@@ -1,7 +1,6 @@
 package service;
 
-import model.entity.Post;
-import model.entity.Writer;
+import model.Post;
 import repository.jdbc_impl.JDBCPostRepositoryImpl;
 
 import java.util.List;
@@ -10,27 +9,27 @@ public class PostService {
 
     private JDBCPostRepositoryImpl postRepository;
 
-    public PostService(Writer writer) {
-        postRepository = new JDBCPostRepositoryImpl(writer);
-    }
-
     public PostService() {
         postRepository = new JDBCPostRepositoryImpl();
     }
 
-    public void create(Post post) {
-        postRepository.save(post);
+    public Post getById(long id) {
+        return postRepository.getById(id);
     }
 
-    public void update(Post post) {
-        postRepository.update(post);
+    public List<Post> getAll() {
+        return postRepository.getAll();
     }
 
-    public void delete(Post post) {
-        postRepository.deleteById(post);
+    public Post save(Post post) {
+        return postRepository.save(post);
     }
 
-    public List<Post> read() {
-        return postRepository.read();
+    public Post update(Post post) {
+        return postRepository.update(post);
+    }
+
+    public Post deleteById(Post post) {
+        return postRepository.deleteById(post);
     }
 }

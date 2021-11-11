@@ -1,6 +1,6 @@
 package service;
 
-import model.entity.Label;
+import model.Label;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

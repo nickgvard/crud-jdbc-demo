@@ -1,6 +1,6 @@
 package repository.jdbc_impl;
 
-import model.entity.Label;
+import model.Label;
 import repository.LabelRepository;
 import utils.database.DataBaseAccess;
 
@@ -58,11 +58,20 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
             preparedStatement.setString(1, label.name());
             preparedStatement.executeUpdate();
 
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            long id;
+            if(resultSet.first())
+                id = resultSet.getLong(1);
+            else
+                throw new RuntimeException("Creating failed");
 
+            resultSet.close();
+            DataBaseAccess.returnConnection(preparedStatement.getConnection());
+
+            return new Label(id, label.name());
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
-        return label;
     }
 
     @Override
@@ -91,26 +100,4 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
         }
         return label;
     }
-
-//    public List<Label> labelsOfThePost(long postId) {
-//        String SQL = "SELECT LabelId, Name, PostId FROM labels " +
-//                "WHERE PostId = ?";
-//        List<Label> labels = new ArrayList<>();
-//        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SQL)){
-//            preparedStatement.setLong(1, postId);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            while (resultSet.next()) {
-//                labels.add(
-//                        new Label(
-//                                resultSet.getLong(1),
-//                                resultSet.getString(2)));
-//            }
-//
-//            resultSet.close();
-//            DataBaseAccess.returnConnection(preparedStatement.getConnection());
-//        }catch (SQLException exception) {
-//            exception.printStackTrace();
-//        }
-//        return labels;
-//    }
 }

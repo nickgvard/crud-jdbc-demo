@@ -1,8 +1,8 @@
 package view;
 
-import model.entity.Label;
-import model.entity.Post;
-import model.entity.Writer;
+import model.Label;
+import model.Post;
+import model.Writer;
 
 import java.util.List;
 

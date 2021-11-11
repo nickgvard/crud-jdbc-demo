@@ -3,9 +3,9 @@ package application;
 import controller.LabelController;
 import controller.PostController;
 import controller.WriterController;
-import model.entity.Label;
-import model.entity.Post;
-import model.entity.Writer;
+import model.Label;
+import model.Post;
+import model.Writer;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ public class CreateProcess extends Process {
                 Writer newWriter = new Writer(writerName, writerLastName);
                 WriterController writerController = new WriterController();
 
-                writerController.create(newWriter);
+                writerController.save(newWriter);
                 System.out.println("**** WRITER ADDED SUCCESSFUL ****\n");
                 writerController.updateWriterView();
                 break;
             case "2":
                 System.out.println("-----------------------------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER, YOU WANT TO POST ADD ****");
-                List<Writer> writers = new WriterController().read();
+                List<Writer> writers = new WriterController().getAll();
                 Writer selectedWriter;
                 Label newLabel;
                 PostController postController;
@@ -65,7 +65,7 @@ public class CreateProcess extends Process {
             case "3":
                 System.out.println("-----------------------------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER, YOU WANT TO LABEL ADD ****");
-                writers = new WriterController().read();
+                writers = new WriterController().getAll();
                 List<Post> posts;
                 Post selectedPost;
                 LabelController labelController;

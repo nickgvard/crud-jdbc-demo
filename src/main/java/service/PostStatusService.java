@@ -13,15 +13,19 @@ public class PostStatusService {
         statusRepository = new JDBCPostStatusRepositoryImpl();
     }
 
-    public List<PostStatus> read() {
-        return statusRepository.read();
+    public PostStatus getById(long id) {
+        return statusRepository.getById(id);
     }
 
-    public void update(PostStatus entity) {
-        statusRepository.update(entity);
+    public List<PostStatus> getAll() {
+        return statusRepository.getAll();
     }
 
-    public void delete(PostStatus entity) {
-        statusRepository.deleteById(entity);
+    public PostStatus update(PostStatus entity) {
+        return statusRepository.update(entity);
+    }
+
+    public PostStatus deleteById(PostStatus entity) {
+        return statusRepository.deleteById(entity);
     }
 }

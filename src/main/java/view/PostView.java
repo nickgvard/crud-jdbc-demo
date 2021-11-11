@@ -1,7 +1,7 @@
 package view;
 
-import model.entity.Label;
-import model.entity.Post;
+import model.Label;
+import model.Post;
 
 import java.util.List;
 

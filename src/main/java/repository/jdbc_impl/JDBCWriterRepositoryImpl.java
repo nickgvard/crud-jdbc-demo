@@ -1,8 +1,7 @@
 package repository.jdbc_impl;
 
-import model.entity.Post;
-import model.entity.Writer;
-import repository.GenericRepository;
+import model.Writer;
+import repository.WriterRepository;
 import utils.database.DataBaseAccess;
 
 import java.sql.PreparedStatement;
@@ -11,98 +10,99 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCWriterRepositoryImpl implements GenericRepository<Writer> {
+public class JDBCWriterRepositoryImpl implements WriterRepository {
 
-    private final DataBaseAccess dataAccess;
-
-    public JDBCWriterRepositoryImpl() {
-        dataAccess = new DataBaseAccess();
-    }
-
-    @Override
-    public void save(Writer entity) {
-        String SQL = "INSERT INTO writers(FirstName, LastName) VALUES (?,?)";
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
-            preparedStatement.setString(1, entity.firstName());
-            preparedStatement.setString(2, entity.lastName());
-            preparedStatement.executeUpdate();
-
-            dataAccess.returnConnection(preparedStatement.getConnection());
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
+    private static final String GET_ALL_QUERY = "SELECT * FROM writers";
+    private static final String GET_BY_ID = "SELECT * FROM writers where WriterId = ?";
+    private static final String SAVE_QUERY = "INSERT INTO writers(FirstName, LastName) VALUES (?,?)";
+    private static final String UPDATE_QUERY = "UPDATE writers SET FirstName = ?, LastName = ? WHERE WriterId = ?";
+    private static final String DELETE_QUERY = "DELETE FROM writers WHERE WriterId = ?";
 
     @Override
-    public void deleteById(Writer entity) {
-        String SQL = "DELETE FROM writers WHERE WriterId = ?";
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
-            preparedStatement.setLong(1, entity.id());
-            preparedStatement.executeUpdate();
-
-            dataAccess.returnConnection(preparedStatement.getConnection());
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
-    }
-
-    @Override
-    public void update(Writer entity) {
-        String SQL = "UPDATE writers SET FirstName = ?, LastName = ? WHERE WriterId = ?";
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
-            preparedStatement.setString(1, entity.firstName());
-            preparedStatement.setString(2, entity.lastName());
-            preparedStatement.setLong(3, entity.id());
-            preparedStatement.executeUpdate();
-
-            dataAccess.returnConnection(preparedStatement.getConnection());
+    public Writer getById(Long aLong) {
+        Writer writer = null;
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)){
+            preparedStatement.setLong(1, aLong);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.first()) {
+                writer = new Writer(
+                        resultSet.getLong(1),
+                        resultSet.getString(2),
+                        resultSet.getString(4));
+            }
         }catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new RuntimeException(exception);
         }
+        return writer;
     }
 
     @Override
-    public List<Writer> read() {
-        String SQL = "SELECT * FROM writers";
+    public List<Writer> getAll() {
         List<Writer> writers = new ArrayList<>();
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL);
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_ALL_QUERY);
              ResultSet resultSet = preparedStatement.executeQuery()){
             while (resultSet.next()) {
                 writers.add(
                         new Writer(
                                 resultSet.getLong(1),
                                 resultSet.getString(2),
-                                resultSet.getString(3),
-                                postsOfTheWriter(resultSet.getLong(1))));
+                                resultSet.getString(3)));
             }
-            dataAccess.returnConnection(preparedStatement.getConnection());
+            DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new RuntimeException(exception);
         }
         return writers;
     }
 
-    private List<Post> postsOfTheWriter(long id) {
-        String SQL = "SELECT PostId, Content, Created, Updated FROM posts " +
-                "WHERE WriterId = ?";
-        List<Post> posts = new ArrayList<>();
-        try (PreparedStatement preparedStatement = dataAccess.preparedStatement(SQL)){
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                posts.add(
-                        new Post(
-                                resultSet.getLong(1),
-                                resultSet.getString(2),
-                                resultSet.getTimestamp(3),
-                                resultSet.getTimestamp(4),
-                                new JDBCLabelRepositoryImpl().labelsOfThePost(resultSet.getLong(1))));
-            }
+    @Override
+    public Writer save(Writer writer) {
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY)){
+            preparedStatement.setString(1, writer.firstName());
+            preparedStatement.setString(2, writer.lastName());
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            long id;
+            if(resultSet.first())
+                id = resultSet.getLong(1);
+            else
+                throw new RuntimeException("Creating failed");
+
             resultSet.close();
-            dataAccess.returnConnection(preparedStatement.getConnection());
-        }catch (SQLException exception) {
-            exception.printStackTrace();
+            DataBaseAccess.returnConnection(preparedStatement.getConnection());
+
+            return new Writer(id, writer.firstName(), writer.lastName());
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
         }
-        return posts;
+    }
+
+    @Override
+    public Writer update(Writer writer) {
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY)){
+            preparedStatement.setString(1, writer.firstName());
+            preparedStatement.setString(2, writer.lastName());
+            preparedStatement.setLong(3, writer.id());
+            preparedStatement.executeUpdate();
+
+            DataBaseAccess.returnConnection(preparedStatement.getConnection());
+        }catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+        return writer;
+    }
+
+    @Override
+    public Writer deleteById(Writer writer) {
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY)){
+            preparedStatement.setLong(1, writer.id());
+            preparedStatement.executeUpdate();
+
+            DataBaseAccess.returnConnection(preparedStatement.getConnection());
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+        return writer;
     }
 }

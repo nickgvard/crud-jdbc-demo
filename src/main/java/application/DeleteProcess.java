@@ -3,9 +3,9 @@ package application;
 import controller.LabelController;
 import controller.PostController;
 import controller.WriterController;
-import model.entity.Label;
-import model.entity.Post;
-import model.entity.Writer;
+import model.Label;
+import model.Post;
+import model.Writer;
 
 import java.util.List;
 
@@ -28,14 +28,14 @@ public class DeleteProcess extends Process {
                 System.out.println("**** PLEASE CHOOSE THE WRITER YOU WANT TO DELETE ****");
 
                 writerController = new WriterController();
-                writers = writerController.read();
+                writers = writerController.getAll();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
                         System.out.println(writers.get(j).firstName() + " " + writers.get(j).lastName() + " (" + (j + 1) + ")");
                     selectedWriter = writers.get(Integer.parseInt(scanner().nextLine()) - 1);
 
-                    writerController.delete(selectedWriter);
+                    writerController.deleteById(selectedWriter);
                     System.out.println("**** WRITER DELETED SUCCESSFUL ****\n");
 
                     writerController.updateWriterView();
@@ -46,7 +46,7 @@ public class DeleteProcess extends Process {
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER FROM WHOM YOU WANT TO DELETE THE POST ****");
 
-                writers = new WriterController().read();
+                writers = new WriterController().getAll();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -63,7 +63,7 @@ public class DeleteProcess extends Process {
                         selectedPost = posts.get(Integer.parseInt(scanner().nextLine()) - 1);
 
                         postController = new PostController();
-                        postController.delete(selectedPost);
+                        postController.deleteById(selectedPost);
                         System.out.println("**** POST DELETED SUCCESSFUL ****\n");
 
                         postController.updatePostView();
@@ -76,7 +76,7 @@ public class DeleteProcess extends Process {
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER FROM WHOM YOU WANT TO DELETE THE LABEL ****");
 
-                writers = new WriterController().read();
+                writers = new WriterController().getAll();
 
                 if (!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)

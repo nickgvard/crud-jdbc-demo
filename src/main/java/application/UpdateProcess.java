@@ -3,9 +3,9 @@ package application;
 import controller.LabelController;
 import controller.PostController;
 import controller.WriterController;
-import model.entity.Label;
-import model.entity.Post;
-import model.entity.Writer;
+import model.Label;
+import model.Post;
+import model.Writer;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
@@ -27,7 +27,7 @@ public class UpdateProcess extends Process {
             case "9":
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER YOU WANT TO UPDATE ****");
-                writers = new WriterController().read();
+                writers = new WriterController().getAll();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -79,7 +79,7 @@ public class UpdateProcess extends Process {
                 System.out.println("----------------------------------------------------");
                 System.out.println("**** PLEASE CHOOSE THE WRITER FROM WHOM YOU WANT TO UPDATE THE POST ****");
                 String update;
-                writers = new WriterController().read();
+                writers = new WriterController().getAll();
 
                 if(!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)
@@ -117,7 +117,7 @@ public class UpdateProcess extends Process {
 
                 List<Label> labels;
                 Label selectedLabel;
-                writers = new WriterController().read();
+                writers = new WriterController().getAll();
 
                 if (!writers.isEmpty()) {
                     for (int j = 0; j < writers.size(); j++)

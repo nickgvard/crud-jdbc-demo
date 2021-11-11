@@ -1,5 +1,6 @@
 package repository;
 
-public interface PostStatusRepository {
+import enums.PostStatus;
 
+public interface PostStatusRepository extends GenericRepository<PostStatus, Long>{
 }

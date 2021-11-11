@@ -1,9 +1,7 @@
 package controller;
 
-import model.entity.Post;
-import model.entity.Writer;
+import model.Post;
 import service.PostService;
-import view.PostView;
 
 import java.util.List;
 
@@ -11,27 +9,28 @@ public class PostController {
 
     private final PostService postService;
 
-    public PostController(Writer writer) {
-        postService = new PostService(writer);
-    }
-
     public PostController() {
         postService = new PostService();
     }
 
-    public void create(Post entity) {
-        postService.create(entity);
+    public Post getById(long id) {
+        return postService.getById(id);
     }
 
-    public void update(Post entity) {
-        postService.update(entity);
+    public List<Post> getAll() {
+        return postService.getAll();
     }
 
-    public void delete(Post entity) {
-        postService.delete(entity);
+    public Post create(Post entity) {
+        return postService.save(entity);
     }
 
-    public List<Post> read() {
-        return postService.read();
+    public Post update(Post entity) {
+        return postService.update(entity);
     }
+
+    public Post deleteById(Post entity) {
+        return postService.deleteById(entity);
+    }
+
 }

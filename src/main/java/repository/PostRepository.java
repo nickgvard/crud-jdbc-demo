@@ -1,6 +1,5 @@
 package repository;
 
-import model.entity.Post;
+import model.Post;
 
-public interface PostRepository extends GenericRepository<Post, Long> {
-}
+public interface PostRepository extends GenericRepository<Post, Long> { }
