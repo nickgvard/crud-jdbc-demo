@@ -14,12 +14,16 @@ public class LabelController {
         labelService = new LabelService();
     }
 
-    public LabelController(Post post) {
-        labelService = new LabelService(post);
+    public Label getById(long id) {
+        return labelService.getById(id);
     }
 
-    public void create(Label entity) {
-        labelService.create(entity);
+    public List<Label> getAll() {
+        return labelService.getAll();
+    }
+
+    public void save(Label entity) {
+        labelService.save(entity);
     }
 
     public void update(Label entity) {
@@ -27,14 +31,6 @@ public class LabelController {
     }
 
     public void delete(Label entity) {
-        labelService.delete(entity);
-    }
-
-    public List<Label> read() {
-        return labelService.read();
-    }
-
-    public void updateLabelView() {
-        labelView.showAllLabels(read());
+        labelService.deleteById(entity);
     }
 }

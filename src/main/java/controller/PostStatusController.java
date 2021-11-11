@@ -25,8 +25,4 @@ public class PostStatusController {
     public List<PostStatus> read() {
         return statusService.read();
     }
-
-    public void updatePostStatusView() {
-        statusView.showAllPostStatus(read());
-    }
 }

@@ -29,8 +29,4 @@ public class WriterController {
     public List<Writer> read() {
         return writerService.read();
     }
-
-    public void updateWriterView() {
-        writerView.showAllWriters(read());
-    }
 }

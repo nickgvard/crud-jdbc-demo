@@ -34,8 +34,4 @@ public class PostController {
     public List<Post> read() {
         return postService.read();
     }
-
-    public void updatePostView() {
-        postView.showAllPosts(read());
-    }
 }

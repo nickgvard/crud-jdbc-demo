@@ -38,7 +38,7 @@ public class LabelServiceTest {
         List<Label> expected = Arrays.asList(label(), label());
         when(mockLabelRepository.read()).thenReturn(Arrays.asList(label(), label()));
 
-        List<Label> actual = labelService.read();
+        List<Label> actual = labelService.getAll();
         verify(mockLabelRepository, times(1)).read();
 
         assertEquals(expected.size(), actual.size());
@@ -57,7 +57,7 @@ public class LabelServiceTest {
     @Test
     public void whenDeleteLabel() {
         doNothing().when(mockLabelRepository).deleteById(label);
-        labelService.delete(label);
+        labelService.deleteById(label);
 
         verify(mockLabelRepository, times(1)).deleteById(label);
     }

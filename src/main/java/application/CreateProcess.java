@@ -93,7 +93,7 @@ public class CreateProcess extends Process {
                     newLabel = new Label(scanner().nextLine());
                     selectedPost.addLabel(newLabel);
                     labelController = new LabelController(selectedPost);
-                    labelController.create(newLabel);
+                    labelController.save(newLabel);
                     System.out.println("**** LABEL ADDED SUCCESSFUL ****\n");
 
                     labelController.updateLabelView();

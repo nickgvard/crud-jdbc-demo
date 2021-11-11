@@ -14,11 +14,15 @@ public class LabelService {
         labelRepository = new JDBCLabelRepositoryImpl();
     }
 
-    public LabelService(Post post) {
-        labelRepository = new JDBCLabelRepositoryImpl(post);
+    public Label getById(long id) {
+        return labelRepository.getById(id);
     }
 
-    public void create(Label label) {
+    public List<Label> getAll() {
+        return labelRepository.getAll();
+    }
+
+    public void save(Label label) {
         labelRepository.save(label);
     }
 
@@ -26,11 +30,7 @@ public class LabelService {
         labelRepository.update(label);
     }
 
-    public void delete(Label label) {
+    public void deleteById(Label label) {
         labelRepository.deleteById(label);
-    }
-
-    public List<Label> read() {
-        return labelRepository.read();
     }
 }

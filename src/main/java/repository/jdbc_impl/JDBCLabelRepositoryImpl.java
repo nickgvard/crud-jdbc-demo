@@ -62,6 +62,7 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
+        return label;
     }
 
     @Override
@@ -75,6 +76,7 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
         }catch (SQLException exception) {
             exception.printStackTrace();
         }
+        return label;
     }
 
     @Override
@@ -87,6 +89,7 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+        return label;
     }
 
 //    public List<Label> labelsOfThePost(long postId) {

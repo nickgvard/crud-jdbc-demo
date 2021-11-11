@@ -1,12 +1,13 @@
 package view;
 
+import controller.LabelController;
 import model.entity.Label;
 
 import java.util.List;
 
 public class LabelView {
 
-    private
+    private LabelController labelController;
 
     public void showAllLabels(List<Label> labels) {
         System.out.println("----------------------------------------------------");
