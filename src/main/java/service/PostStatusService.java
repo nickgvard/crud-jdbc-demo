@@ -21,11 +21,15 @@ public class PostStatusService {
         return statusRepository.getAll();
     }
 
-    public PostStatus update(PostStatus entity) {
-        return statusRepository.update(entity);
+    public PostStatus save(PostStatus postStatus) {
+        return statusRepository.save(postStatus);
     }
 
-    public PostStatus deleteById(PostStatus entity) {
-        return statusRepository.deleteById(entity);
+    public PostStatus update(PostStatus postStatus) {
+        return statusRepository.update(postStatus);
+    }
+
+    public PostStatus deleteById(PostStatus postStatus) {
+        return statusRepository.deleteById(postStatus);
     }
 }

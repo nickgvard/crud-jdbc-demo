@@ -1,7 +1,5 @@
 package service;
 
-import model.Label;
-import model.Post;
 import model.Writer;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +9,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import repository.jdbc_impl.JDBCWriterRepositoryImpl;
-import java.sql.Timestamp;
+
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,66 +35,63 @@ public class WriterServiceTest {
     }
 
     @Test
+    public void whenReadWriterById() {
+        Writer expected = writer();
+        when(mockWriterRepository.getById(writer.id())).thenReturn(expected);
+
+        Writer actual = writerService.getById(writer.id());
+
+        verify(mockWriterRepository, times(1)).getById(writer.id());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void whenReadAllWriter() {
+        List<Writer> expected = Arrays.asList(writer(), writer());
+        when(mockWriterRepository.getAll()).thenReturn(expected);
+
+        List<Writer> actual = writerService.getAll();
+
+        verify(mockWriterRepository, times(1)).getAll();
+        assertEquals(expected, actual);
+        assertEquals(expected.size(), actual.size());
+    }
+
+    @Test
     public void whenCreateWriter() {
-        doNothing().when(mockWriterRepository).save(writer);
+        Writer expected = writer();
+        when(mockWriterRepository.save(writer)).thenReturn(expected);
 
-        writerService.save(writer);
+        Writer actual = writerService.save(writer);
+
         verify(mockWriterRepository, times(1)).save(writer);
-    }
-
-    @Test
-    public void whenReadWriterWithoutPostAndEqFields() {
-        List<Writer> expected = Collections.singletonList(writer("withoutPost"));
-        when(mockWriterRepository.read()).thenReturn(Collections.singletonList(writer("withoutPost")));
-
-        List<Writer> actual = writerService.getAll();
-        verify(mockWriterRepository, times(1)).read();
-
-        assertEquals(expected.get(0).id(), actual.get(0).id());
-        assertEquals(expected.get(0).firstName(), actual.get(0).firstName());
-        assertEquals(expected.get(0).lastName(), actual.get(0).lastName());
-        assertEquals(expected.get(0).posts().size() == 0, actual.get(0).posts().size() == 0);
-    }
-
-    @Test
-    public void whenReadWriterWithPostAndEqFields() {
-        List<Writer> expected = Collections.singletonList(writer("withPost"));
-        when(mockWriterRepository.read()).thenReturn(Collections.singletonList(writer("withPost")));
-
-        List<Writer> actual = writerService.getAll();
-        verify(mockWriterRepository, times(1)).read();
-
-        assertEquals(expected.get(0).id(), actual.get(0).id());
-        assertEquals(expected.get(0).firstName(), actual.get(0).firstName());
-        assertEquals(expected.get(0).lastName(), actual.get(0).lastName());
-        assertEquals(expected.get(0).posts().size() != 0, actual.get(0).posts().size() != 0);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void whenUpdateWriter() {
-        doNothing().when(mockWriterRepository).update(writer);
-        writerService.update(writer);
+        Writer expected = writer();
+        when(mockWriterRepository.update(writer)).thenReturn(expected);
+
+        Writer actual = writerService.update(writer);
 
         verify(mockWriterRepository).update(writer);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void whenDeleteWriter() {
-        doNothing().when(mockWriterRepository).deleteById(writer);
-        writerService.deleteById(writer);
+        Writer expected = writer();
+
+        when(mockWriterRepository.deleteById(writer)).thenReturn(expected);
+
+        Writer actual = writerService.deleteById(writer);
 
         verify(mockWriterRepository).deleteById(writer);
+        assertEquals(expected, actual);
     }
 
-    private Writer writer(String typeWriter) {
-        switch (typeWriter) {
-            case "withPost":
-                return new Writer(1L, "Some first name", "Some last name",
-                        Collections.singletonList(new Post(1, "Some content", new Timestamp(100000L), new Timestamp(200000L),
-                                Collections.singletonList(new Label(1L, "Some label name")))));
-            case "withoutPost":
-                return new Writer("Some first name", "Some last name");
-            default: throw new RuntimeException("Illegal argument");
-        }
+    private Writer writer() {
+        return new Writer("Some first name", "Some last name");
     }
 }

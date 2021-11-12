@@ -21,15 +21,15 @@ public class WriterController {
         return writerService.getAll();
     }
 
-    public void save(Writer entity) {
-        writerService.save(entity);
+    public Writer save(Writer entity) {
+        return writerService.save(entity);
     }
 
-    public void update(Writer entity) {
-        writerService.update(entity);
+    public Writer update(Writer entity) {
+        return writerService.update(entity);
     }
 
-    public void deleteById(Writer entity) {
-        writerService.deleteById(entity);
+    public Writer deleteById(Writer entity) {
+        return writerService.deleteById(entity);
     }
 }

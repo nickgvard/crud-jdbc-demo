@@ -21,7 +21,7 @@ public class PostController {
         return postService.getAll();
     }
 
-    public Post create(Post entity) {
+    public Post save(Post entity) {
         return postService.save(entity);
     }
 

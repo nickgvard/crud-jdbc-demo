@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
-      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
-
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
     <changeSet id="v3-posts-01" author="Nikita Gvardeev">
         <createTable tableName="posts">
             <column name="PostId" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="WriterId" type="INT">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="PostStatusId" type="INT">
                 <constraints nullable="false"/>
@@ -26,15 +23,5 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-    </changeSet>
-
-    <changeSet id="v3-posts-02" author="Nikita Gvardeev">
-        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="WriterId" constraintName="posts_writers_fk" referencedTableName="writers"
-                                 referencedColumnNames="WriterId" onDelete="CASCADE" onUpdate="CASCADE"/>
-    </changeSet>
-
-    <changeSet id="v3-posts-03" author="Nikita Gvardeev">
-        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="PostStatusId" constraintName="posts_poststatuses_fk" referencedTableName="poststatuses"
-                                 referencedColumnNames="PostStatusId" onDelete="CASCADE" onUpdate="CASCADE"/>
     </changeSet>
 </databaseChangeLog>

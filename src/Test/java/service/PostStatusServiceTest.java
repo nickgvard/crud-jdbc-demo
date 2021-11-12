@@ -10,8 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import repository.jdbc_impl.JDBCPostStatusRepositoryImpl;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -31,32 +30,42 @@ public class PostStatusServiceTest {
     }
 
     @Test
+    public void whenReadAllPostStatus() {
+        List<PostStatus> expected = Arrays.asList(PostStatus.ACTIVE, PostStatus.UNDER_REVIEW, PostStatus.DELETED);
+
+        when(statusRepository.getAll()).thenReturn(expected);
+
+        List<PostStatus> actual = statusRepository.getAll();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void whenReadPostStatusACTIVE() {
         PostStatus expected = PostStatus.ACTIVE;
-        when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.ACTIVE));
+        when(statusRepository.getById(PostStatus.ACTIVE.statusId())).thenReturn(expected);
 
-        List<PostStatus> actual = statusService.getAll();
+        PostStatus actual = statusService.getById(PostStatus.ACTIVE.statusId());
 
-        assertEquals(expected, actual.get(0));
+        assertEquals(expected, actual);
     }
 
     @Test
     public void whenReadPostStatusDELETED() {
         PostStatus expected = PostStatus.DELETED;
-        when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.DELETED));
+        when(statusRepository.getById(PostStatus.DELETED.statusId())).thenReturn(expected);
 
-        List<PostStatus> actual = statusService.getAll();
+        PostStatus actual = statusService.getById(PostStatus.DELETED.statusId());
 
-        assertEquals(expected, actual.get(0));
+        assertEquals(expected, actual);
     }
 
     @Test
     public void whenReadPostStatusUNDER_REVIEW() {
         PostStatus expected = PostStatus.UNDER_REVIEW;
-        when(statusRepository.read()).thenReturn(Collections.singletonList(PostStatus.UNDER_REVIEW));
+        when(statusRepository.getById(PostStatus.UNDER_REVIEW.statusId())).thenReturn(expected);
 
-        List<PostStatus> actual = statusService.getAll();
+        PostStatus actual = statusService.getById(PostStatus.UNDER_REVIEW.statusId());
 
-        assertEquals(expected, actual.get(0));
+        assertEquals(expected, actual);
     }
 }

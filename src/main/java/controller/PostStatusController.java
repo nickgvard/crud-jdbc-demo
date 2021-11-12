@@ -21,12 +21,16 @@ public class PostStatusController {
         return statusService.getAll();
     }
 
-    public PostStatus update(PostStatus entity) {
-        return statusService.update(entity);
+    public PostStatus save(PostStatus postStatus) {
+        return statusService.save(postStatus);
     }
 
-    public PostStatus deleteById(PostStatus entity) {
-        return statusService.deleteById(entity);
+    public PostStatus update(PostStatus postStatus) {
+        return statusService.update(postStatus);
+    }
+
+    public PostStatus deleteById(PostStatus postStatus) {
+        return statusService.deleteById(postStatus);
     }
 
 

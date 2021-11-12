@@ -1,6 +1,5 @@
 package service;
 
-import model.Label;
 import model.Post;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import repository.jdbc_impl.JDBCPostRepositoryImpl;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,42 +34,63 @@ public class PostServiceTest {
     }
 
     @Test
-    public void whenReadPostsAndEqFields() {
+    public void whenReadPostById() {
+        Post expected = post();
+        when(mockPostRepository.getById(post.id())).thenReturn(expected);
+
+        Post actual = postService.getById(post.id());
+
+        verify(mockPostRepository, times(1)).getById(post.id());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void whenReadAllPosts() {
         List<Post> expected = Arrays.asList(post(), post());
-        when(mockPostRepository.read()).thenReturn(Arrays.asList(post(), post()));
+        when(mockPostRepository.getAll()).thenReturn(expected);
 
         List<Post> actual = postService.getAll();
-        verify(mockPostRepository).read();
 
+        verify(mockPostRepository, times(1)).getAll();
+        assertEquals(expected, actual);
         assertEquals(expected.size(), actual.size());
-        assertEquals(expected.get(0).id(), actual.get(0).id());
-        assertEquals(expected.get(0).content(), actual.get(0).content());
-        assertEquals(expected.get(0).created(), actual.get(0).created());
-        assertEquals(expected.get(0).updated(), actual.get(0).updated());
-        assertEquals(expected.get(0).labels().size(), actual.get(0).labels().size());
+    }
+
+    @Test
+    public void whenCreatPost() {
+        Post expected = post();
+        when(mockPostRepository.save(post)).thenReturn(expected);
+
+        Post actual = postService.save(post);
+
+        verify(mockPostRepository, times(1)).save(post);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void whenUpdatePost() {
-        doNothing().when(mockPostRepository).update(post);
-        postService.update(post);
+        Post expected = post();
+        when(mockPostRepository.update(post)).thenReturn(expected);
+
+        Post actual = postService.update(post);
 
         verify(mockPostRepository, times(1)).update(post);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void whenDeletePost() {
-        doNothing().when(mockPostRepository).deleteById(post);
-        postService.deleteById(post);
+        Post expected = post();
+        when(mockPostRepository.deleteById(post)).thenReturn(expected);
+
+        Post actual = postService.deleteById(post);
 
         verify(mockPostRepository, times(1)).deleteById(post);
+        assertEquals(expected, actual);
     }
 
     private Post post() {
         return new Post(1, "Some content",
-                new Timestamp(10000000L), new Timestamp(20000000L),
-                new ArrayList<>(Arrays.asList(
-                        new Label(1, "Some name"),
-                        new Label(1, "Some name"))));
+                new Timestamp(10000000L), new Timestamp(20000000L));
     }
 }

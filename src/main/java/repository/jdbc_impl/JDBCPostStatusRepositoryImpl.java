@@ -63,7 +63,8 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
     @Override
     public PostStatus save(PostStatus postStatus) {
         try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY, false)){
-            preparedStatement.setString(1, postStatus.name());
+            preparedStatement.setLong(1, postStatus.statusId());
+            preparedStatement.setString(2, postStatus.name());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());

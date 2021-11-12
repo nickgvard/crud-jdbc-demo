@@ -36,6 +36,11 @@ public class LabelView {
             System.out.println("Labels is empty");
     }
 
+    public void save(Label label) {
+        labelController.save(label);
+        System.out.println("Label save successful");
+    }
+
     public void updateLabel(Label label) {
         labelController.update(label);
         System.out.println("Label updated successful");
