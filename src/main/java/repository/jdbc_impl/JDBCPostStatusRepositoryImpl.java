@@ -13,18 +13,18 @@ import java.util.List;
 
 public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
-    private static final String GET_ALL_QUERY = "SELECT * FROM poststatus";
-    private static final String GET_BY_ID = "SELECT PostStatusId FROM poststatus where PostStatusId = ?";
-    private static final String SAVE_QUERY = "INSERT INTO poststatus (PostStatusId, Name) VALUES (?,?)";
-    private static final String UPDATE_QUERY = "UPDATE poststatus SET Name = ? WHERE PostStatusId = ?";
-    private static final String DELETE_QUERY = "DELETE FROM poststatus WHERE PostStatusId = ?";
+    private static final String GET_ALL_QUERY = "SELECT * FROM poststatuses";
+    private static final String GET_BY_ID = "SELECT PostStatusId FROM poststatuses where PostStatusId = ?";
+    private static final String SAVE_QUERY = "INSERT INTO poststatuses (PostStatusId, Name) VALUES (?,?)";
+    private static final String UPDATE_QUERY = "UPDATE poststatuses SET Name = ? WHERE PostStatusId = ?";
+    private static final String DELETE_QUERY = "DELETE FROM poststatuses WHERE PostStatusId = ?";
 
     @Override
     public PostStatus getById(Long aLong) {
         try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)){
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.first()) {
+            if(resultSet.next()) {
                 int id = resultSet.getInt(1);
                 switch (id) {
                     case 1:
@@ -62,7 +62,7 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
     @Override
     public PostStatus save(PostStatus postStatus) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY, false)){
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY)){
             preparedStatement.setLong(1, postStatus.statusId());
             preparedStatement.setString(2, postStatus.name());
             preparedStatement.executeUpdate();
@@ -79,6 +79,7 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
     public PostStatus update(PostStatus postStatus) {
         try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY)){
             preparedStatement.setString(1, postStatus.name());
+            preparedStatement.setLong(2, postStatus.statusId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());

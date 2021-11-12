@@ -16,7 +16,6 @@ public class LabelView {
     public void showLabelById(long id) {
         Label label = labelController.getById(id);
         if(label != null) {
-            System.out.println("----------------------------------------------------");
             System.out.println(label);
         }else
             System.out.println("Not found label by this id");
@@ -25,13 +24,9 @@ public class LabelView {
     public void showAllLabels() {
         List<Label> labels = labelController.getAll();
         if(!labels.isEmpty()) {
-            System.out.println("----------------------------------------------------");
-            System.out.println("ALL LABELS FROM DATA BASE");
             for (Label label : labels) {
                 System.out.println(label);
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            System.out.println("----------------------------------------------------");
         }else
             System.out.println("Labels is empty");
     }

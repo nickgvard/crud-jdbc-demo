@@ -16,22 +16,17 @@ public class PostStatusView {
     public void showPostStatusById(long id) {
         PostStatus postStatus = postStatusController.getById(id);
         if(postStatus != null) {
-            System.out.println("----------------------------------------------------");
             System.out.println(postStatus.name());
         }else
-            System.out.println("Not found post statuses by this id");
+            System.out.println("Not found post status by this id");
     }
 
     public void showAllPostStatus() {
         List<PostStatus> postStatuses = postStatusController.getAll();
         if(!postStatuses.isEmpty()) {
-            System.out.println("----------------------------------------------------");
-            System.out.println("ALL POST STATUS FROM DATA BASE");
             for (PostStatus postStatus : postStatuses) {
                 System.out.println(postStatus.name().toLowerCase());
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            System.out.println("----------------------------------------------------");
         }else
             System.out.println("Post statuses is empty");
     }

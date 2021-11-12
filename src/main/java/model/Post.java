@@ -6,13 +6,19 @@ import java.util.List;
 public class Post extends BaseEntity {
 
     private final String content;
-    private final Timestamp created;
+    private Timestamp created;
     private Timestamp updated;
     private List<Label> labels;
 
     public Post(String content, Timestamp created) {
         this.content = content;
         this.created = created;
+    }
+
+    public Post(long id, String content, Timestamp updated) {
+        super(id);
+        this.content = content;
+        this.updated = updated;
     }
 
     public Post(long id, String content, Timestamp created, Timestamp updated) {

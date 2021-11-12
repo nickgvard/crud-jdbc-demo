@@ -1,8 +1,6 @@
 package view;
 
 import controller.WriterController;
-import model.Label;
-import model.Post;
 import model.Writer;
 
 import java.util.List;
@@ -18,7 +16,6 @@ public class WriterView {
     public void showWriterById(long id) {
         Writer writer = writerController.getById(id);
         if(writer != null) {
-            System.out.println("----------------------------------------------------");
             System.out.println(writer);
         }else
             System.out.println("Not found writer by this id");
@@ -27,15 +24,11 @@ public class WriterView {
     public void showAllWriters() {
         List<Writer> writers = writerController.getAll();
         if(!writers.isEmpty()) {
-            System.out.println("----------------------------------------------------");
-            System.out.println("ALL WRITERS FROM DATA BASE");
             for (Writer writer : writers) {
                 System.out.println(writer);
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            System.out.println("----------------------------------------------------");
         }else
-            System.out.println("---Writer is empty---");
+            System.out.println("Writers is empty");
     }
 
     public void saveWriter(Writer writer) {

@@ -27,7 +27,6 @@ public class ConnectionPool implements IConnectionPool {
         try {
             try {
                 PROPERTIES.load(new FileInputStream("src/main/resources/db/migration/db.properties"));
-                //preset pool size
                 POOL_SIZE = Integer.parseInt(PROPERTIES.getProperty("maxpoolsize"));
             } catch (IOException | NumberFormatException exception) {
                 exception.printStackTrace();

@@ -16,7 +16,6 @@ public class PostView {
     public void showPostById(long id) {
         Post post = postController.getById(id);
         if(post != null) {
-            System.out.println("----------------------------------------------------");
             System.out.println(post);
         }else
             System.out.println("Not found post by this id");
@@ -25,18 +24,14 @@ public class PostView {
     public void showAllPosts() {
         List<Post> posts = postController.getAll();
         if(!posts.isEmpty()) {
-            System.out.println("----------------------------------------------------");
-            System.out.println("ALL POSTS FROM DATA BASE");
             for (Post post : posts) {
                 System.out.println(post);
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~");
             }
-            System.out.println("----------------------------------------------------");
         }else
-            System.out.println("---Posts is empty---");
+            System.out.println("Posts is empty");
     }
 
-    public void saveWriter(Post post) {
+    public void savePost(Post post) {
         postController.save(post);
         System.out.println("Post save successful");
     }

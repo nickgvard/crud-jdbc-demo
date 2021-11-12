@@ -13,7 +13,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
 
     private static final String GET_BY_ID = "SELECT * FROM posts where PostId = ?";
     private static final String GET_ALL_QUERY = "SELECT * FROM posts";
-    private static final String SAVE_QUERY = "INSERT INTO posts(Content, Created, PostStatusId) VALUES (?,?,?)";
+    private static final String SAVE_QUERY = "INSERT INTO posts (Content, Created, PostStatusId) VALUES (?,?,?)";
     private static final String UPDATE_QUERY = "UPDATE posts SET Content = ?, Updated = ? WHERE PostId = ?";
     private static final String DELETE_QUERY = "DELETE FROM posts WHERE PostId = ?";
 
@@ -23,13 +23,14 @@ public class JDBCPostRepositoryImpl implements PostRepository {
         try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)){
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.first()) {
+            if(resultSet.next()) {
                 post = new Post(
                         resultSet.getLong(1),
-                        resultSet.getString(2),
-                        resultSet.getTimestamp(3),
-                        resultSet.getTimestamp(4));
+                        resultSet.getString(4),
+                        resultSet.getTimestamp(5),
+                        resultSet.getTimestamp(6));
             }
+            resultSet.close();
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -49,7 +50,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
                                 resultSet.getTimestamp(5),
                                 resultSet.getTimestamp(6)));
             }
-
+            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             exception.printStackTrace();
@@ -59,7 +60,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
 
     @Override
     public Post save(Post post) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY, false)){
+        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY)){
             preparedStatement.setString(1, post.content());
             preparedStatement.setTimestamp(2, post.created());
             preparedStatement.setLong(3, PostStatus.UNDER_REVIEW.statusId());
@@ -67,7 +68,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             long id;
-            if(resultSet.first())
+            if(resultSet.next())
                 id = resultSet.getLong(1);
             else
                 throw new RuntimeException("Creating failed");

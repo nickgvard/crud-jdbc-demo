@@ -22,7 +22,7 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
         try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)) {
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.first();
+            resultSet.next();
             label = new Label(resultSet.getLong(1), resultSet.getString(3));
 
             resultSet.close();

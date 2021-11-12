@@ -14,7 +14,7 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
 
     private static final String GET_ALL_QUERY = "SELECT * FROM writers";
     private static final String GET_BY_ID = "SELECT * FROM writers where WriterId = ?";
-    private static final String SAVE_QUERY = "INSERT INTO writers(FirstName, LastName) VALUES (?,?)";
+    private static final String SAVE_QUERY = "INSERT INTO writers (FirstName, LastName) VALUES (?,?)";
     private static final String UPDATE_QUERY = "UPDATE writers SET FirstName = ?, LastName = ? WHERE WriterId = ?";
     private static final String DELETE_QUERY = "DELETE FROM writers WHERE WriterId = ?";
 
@@ -24,12 +24,14 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
         try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)){
             preparedStatement.setLong(1, aLong);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.first()) {
+            if(resultSet.next()) {
                 writer = new Writer(
                         resultSet.getLong(1),
                         resultSet.getString(2),
-                        resultSet.getString(4));
+                        resultSet.getString(3));
             }
+            resultSet.close();
+            DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -48,6 +50,7 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
                                 resultSet.getString(2),
                                 resultSet.getString(3)));
             }
+            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -64,7 +67,7 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             long id;
-            if(resultSet.first())
+            if(resultSet.next())
                 id = resultSet.getLong(1);
             else
                 throw new RuntimeException("Creating failed");
