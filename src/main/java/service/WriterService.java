@@ -5,6 +5,11 @@ import repository.jdbc_impl.JDBCWriterRepositoryImpl;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class WriterService {
 
     private JDBCWriterRepositoryImpl writerRepository;

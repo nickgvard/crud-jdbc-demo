@@ -2,6 +2,11 @@ package model;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class Writer extends BaseEntity {
 
     private final String firstName;

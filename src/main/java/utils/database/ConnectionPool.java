@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class ConnectionPool implements IConnectionPool {
 
     private static List<Connection> connectionPool;

@@ -3,6 +3,11 @@ package model;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class Post extends BaseEntity {
 
     private final String content;

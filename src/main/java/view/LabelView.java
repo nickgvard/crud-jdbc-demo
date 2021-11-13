@@ -5,6 +5,11 @@ import model.Label;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class LabelView {
 
     private final LabelController labelController;

@@ -5,6 +5,11 @@ import service.WriterService;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class WriterController {
 
     private final WriterService writerService;

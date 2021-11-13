@@ -10,6 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class JDBCWriterRepositoryImpl implements WriterRepository {
 
     private static final String GET_ALL_QUERY = "SELECT * FROM writers";

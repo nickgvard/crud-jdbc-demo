@@ -5,6 +5,11 @@ import service.PostService;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class PostController {
 
     private final PostService postService;

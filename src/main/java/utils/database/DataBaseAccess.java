@@ -2,6 +2,11 @@ package utils.database;
 
 import java.sql.*;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class DataBaseAccess {
 
     public static PreparedStatement preparedStatement(String sql, boolean autoCommit) {

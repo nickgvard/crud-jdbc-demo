@@ -5,6 +5,11 @@ import model.Writer;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class WriterView {
 
     private final WriterController writerController;

@@ -5,6 +5,11 @@ import repository.jdbc_impl.JDBCLabelRepositoryImpl;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class LabelService {
 
     private JDBCLabelRepositoryImpl labelRepository;

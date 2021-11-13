@@ -11,6 +11,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
     private static final String GET_ALL_QUERY = "SELECT * FROM poststatuses";

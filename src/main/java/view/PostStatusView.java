@@ -5,6 +5,11 @@ import enums.PostStatus;
 
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class PostStatusView {
 
     private final PostStatusController postStatusController;

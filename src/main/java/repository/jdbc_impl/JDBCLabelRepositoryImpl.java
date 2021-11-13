@@ -8,6 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Nikita Gvardeev
+ * 13.11.2021
+ */
+
 public class JDBCLabelRepositoryImpl implements LabelRepository {
 
     private static final String GET_BY_ID = "SELECT * FROM labels WHERE LabelId = ?";
