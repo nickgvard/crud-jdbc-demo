@@ -11,7 +11,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import repository.jdbc_impl.JDBCWriterRepositoryImpl;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,9 +25,6 @@ public class WriterServiceTest {
     @Mock
     private JDBCWriterRepositoryImpl mockWriterRepository;
 
-    @Mock
-    private Writer writer;
-
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -37,11 +33,11 @@ public class WriterServiceTest {
     @Test
     public void whenReadWriterById() {
         Writer expected = writer();
-        when(mockWriterRepository.getById(writer.id())).thenReturn(expected);
+        when(mockWriterRepository.getById(anyLong())).thenReturn(expected);
 
-        Writer actual = writerService.getById(writer.id());
+        Writer actual = writerService.getById(anyLong());
 
-        verify(mockWriterRepository, times(1)).getById(writer.id());
+        verify(mockWriterRepository, times(1)).getById(any());
         assertEquals(expected, actual);
     }
 
@@ -60,22 +56,22 @@ public class WriterServiceTest {
     @Test
     public void whenCreateWriter() {
         Writer expected = writer();
-        when(mockWriterRepository.save(writer)).thenReturn(expected);
+        when(mockWriterRepository.save(any())).thenReturn(expected);
 
-        Writer actual = writerService.save(writer);
+        Writer actual = writerService.save(any());
 
-        verify(mockWriterRepository, times(1)).save(writer);
+        verify(mockWriterRepository, times(1)).save(any());
         assertEquals(expected, actual);
     }
 
     @Test
     public void whenUpdateWriter() {
         Writer expected = writer();
-        when(mockWriterRepository.update(writer)).thenReturn(expected);
+        when(mockWriterRepository.update(any())).thenReturn(expected);
 
-        Writer actual = writerService.update(writer);
+        Writer actual = writerService.update(any());
 
-        verify(mockWriterRepository).update(writer);
+        verify(mockWriterRepository).update(any());
         assertEquals(expected, actual);
     }
 
@@ -83,11 +79,11 @@ public class WriterServiceTest {
     public void whenDeleteWriter() {
         Writer expected = writer();
 
-        when(mockWriterRepository.deleteById(writer)).thenReturn(expected);
+        when(mockWriterRepository.deleteById(any())).thenReturn(expected);
 
-        Writer actual = writerService.deleteById(writer);
+        Writer actual = writerService.deleteById(any());
 
-        verify(mockWriterRepository).deleteById(writer);
+        verify(mockWriterRepository).deleteById(any());
         assertEquals(expected, actual);
     }
 

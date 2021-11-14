@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+    <changeSet id="v5-pstlb-01" author="Nikita Gvardeev">
+        <createTable tableName="posts_labels">
+            <column name="Id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="PostId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LabelId" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="v5_pstlb-02" author="Nikita Gvardeev">
+        <addForeignKeyConstraint baseTableName="posts_labels" baseColumnNames="PostId" constraintName="postslabels_posts_fk" referencedTableName="posts"
+                                 referencedColumnNames="PostId" onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+    <changeSet id="v5_pstlb-03" author="Nikita Gvardeev">
+        <addForeignKeyConstraint baseTableName="posts_labels" baseColumnNames="LabelId" constraintName="postslabels_labels_fk" referencedTableName="labels"
+                                 referencedColumnNames="LabelId" onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

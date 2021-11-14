@@ -7,4 +7,5 @@
     <include file="src/main/resources/db/migration/v2__table_writers.xml"/>
     <include file="src/main/resources/db/migration/v3__table_posts.xml"/>
     <include file="src/main/resources/db/migration/v4__table_labels.xml"/>
+    <include file="src/main/resources/db/migration/v5__table_posts_labels.xml"/>
 </databaseChangeLog>

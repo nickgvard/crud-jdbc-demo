@@ -1,5 +1,8 @@
 package utils.database;
 
+import liquibase.util.beans.PropertyUtils;
+import org.apache.commons.text.StringSubstitutor;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -20,19 +23,21 @@ public class ConnectionPool implements IConnectionPool {
     private static List<Connection> usedConnection;
     private final static Properties PROPERTIES;
     private static int POOL_SIZE;
+    private final static StringSubstitutor STR_SUB;
 
     private static final ConnectionPool INSTANCE = new ConnectionPool();
 
     private ConnectionPool() {}
 
     static {
+        STR_SUB = new StringSubstitutor(System.getenv());
         PROPERTIES = new Properties();
         //default pool size
         POOL_SIZE = 10;
         try {
             try {
-                PROPERTIES.load(new FileInputStream("src/main/resources/db/migration/db.properties"));
-                POOL_SIZE = Integer.parseInt(PROPERTIES.getProperty("maxpoolsize"));
+                PROPERTIES.load(new FileInputStream("src/main/resources/application.properties"));
+                POOL_SIZE = Integer.parseInt(STR_SUB.replace(PROPERTIES.getProperty("poolsize")));
             } catch (IOException | NumberFormatException exception) {
                 exception.printStackTrace();
             }
@@ -90,6 +95,6 @@ public class ConnectionPool implements IConnectionPool {
     }
 
     private static Connection createdConnection() throws SQLException {
-        return DriverManager.getConnection(PROPERTIES.getProperty("url"), PROPERTIES.getProperty("username"), PROPERTIES.getProperty("password"));
+        return DriverManager.getConnection(STR_SUB.replace(PROPERTIES.getProperty("url")), STR_SUB.replace(PROPERTIES.getProperty("username")), STR_SUB.replace(PROPERTIES.getProperty("password")));
     }
 }

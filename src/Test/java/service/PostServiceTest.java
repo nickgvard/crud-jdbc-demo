@@ -20,9 +20,6 @@ import static org.mockito.Mockito.*;
 public class PostServiceTest {
 
     @Mock
-    private Post post;
-
-    @Mock
     private JDBCPostRepositoryImpl mockPostRepository;
 
     @InjectMocks
@@ -36,11 +33,11 @@ public class PostServiceTest {
     @Test
     public void whenReadPostById() {
         Post expected = post();
-        when(mockPostRepository.getById(post.id())).thenReturn(expected);
+        when(mockPostRepository.getById(anyLong())).thenReturn(expected);
 
-        Post actual = postService.getById(post.id());
+        Post actual = postService.getById(anyLong());
 
-        verify(mockPostRepository, times(1)).getById(post.id());
+        verify(mockPostRepository, times(1)).getById(any());
         assertEquals(expected, actual);
     }
 
@@ -59,33 +56,33 @@ public class PostServiceTest {
     @Test
     public void whenCreatPost() {
         Post expected = post();
-        when(mockPostRepository.save(post)).thenReturn(expected);
+        when(mockPostRepository.save(any())).thenReturn(expected);
 
-        Post actual = postService.save(post);
+        Post actual = postService.save(any());
 
-        verify(mockPostRepository, times(1)).save(post);
+        verify(mockPostRepository, times(1)).save(any());
         assertEquals(expected, actual);
     }
 
     @Test
     public void whenUpdatePost() {
         Post expected = post();
-        when(mockPostRepository.update(post)).thenReturn(expected);
+        when(mockPostRepository.update(any())).thenReturn(expected);
 
-        Post actual = postService.update(post);
+        Post actual = postService.update(any());
 
-        verify(mockPostRepository, times(1)).update(post);
+        verify(mockPostRepository, times(1)).update(any());
         assertEquals(expected, actual);
     }
 
     @Test
     public void whenDeletePost() {
         Post expected = post();
-        when(mockPostRepository.deleteById(post)).thenReturn(expected);
+        when(mockPostRepository.deleteById(any())).thenReturn(expected);
 
-        Post actual = postService.deleteById(post);
+        Post actual = postService.deleteById(any());
 
-        verify(mockPostRepository, times(1)).deleteById(post);
+        verify(mockPostRepository, times(1)).deleteById(any());
         assertEquals(expected, actual);
     }
 

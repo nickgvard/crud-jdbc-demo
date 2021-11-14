@@ -7,9 +7,6 @@
             <column name="LabelId" type="INT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="PostId" type="INT">
-                <constraints nullable="true"/>
-            </column>
             <column name="Name" type="VARCHAR(64)">
                 <constraints nullable="false"/>
             </column>

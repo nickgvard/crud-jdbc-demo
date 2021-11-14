@@ -20,9 +20,6 @@ import static org.junit.Assert.*;
 public class LabelServiceTest {
 
     @Mock
-    private Label label;
-
-    @Mock
     private JDBCLabelRepositoryImpl mockLabelRepository;
 
     @InjectMocks
@@ -36,11 +33,11 @@ public class LabelServiceTest {
     @Test
     public void whenReadLabelById() {
         Label expected = label();
-        when(mockLabelRepository.getById(label.id())).thenReturn(expected);
+        when(mockLabelRepository.getById(anyLong())).thenReturn(expected);
 
-        Label actual = labelService.getById(label.id());
+        Label actual = labelService.getById(anyLong());
 
-        verify(mockLabelRepository, times(1)).getById(label.id());
+        verify(mockLabelRepository, times(1)).getById(any());
         assertEquals(expected, actual);
     }
 
@@ -59,11 +56,11 @@ public class LabelServiceTest {
     public void whenCreateLabel() {
         Label expected = label();
 
-        when(mockLabelRepository.save(label)).thenReturn(expected);
+        when(mockLabelRepository.save(any())).thenReturn(expected);
 
-        Label actual = labelService.save(label);
+        Label actual = labelService.save(any());
 
-        verify(mockLabelRepository, times(1)).save(label);
+        verify(mockLabelRepository, times(1)).save(any());
         assertEquals(expected, actual);
     }
 
@@ -71,11 +68,11 @@ public class LabelServiceTest {
     public void whenUpdateLabel() {
         Label expected = label();
 
-        when(mockLabelRepository.update(label)).thenReturn(expected);
+        when(mockLabelRepository.update(any())).thenReturn(expected);
 
-        Label actual = labelService.update(label);
+        Label actual = labelService.update(any());
 
-        verify(mockLabelRepository, times(1)).update(label);
+        verify(mockLabelRepository, times(1)).update(any());
         assertEquals(expected, actual);
     }
 
@@ -83,11 +80,11 @@ public class LabelServiceTest {
     public void whenDeleteLabel() {
         Label expected = label();
 
-        when(mockLabelRepository.deleteById(label)).thenReturn(expected);
+        when(mockLabelRepository.deleteById(any())).thenReturn(expected);
 
-        Label actual = labelService.deleteById(label);
+        Label actual = labelService.deleteById(any());
 
-        verify(mockLabelRepository, times(1)).deleteById(label);
+        verify(mockLabelRepository, times(1)).deleteById(any());
         assertEquals(expected, actual);
     }
 
