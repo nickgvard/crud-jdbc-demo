@@ -1,6 +1,8 @@
 package repository.jdbc;
 
 import lombok.Cleanup;
+import model.Label;
+import model.Post;
 import model.Writer;
 import repository.WriterRepository;
 import utils.database.DataBaseAccess;
@@ -18,8 +20,9 @@ import java.util.List;
 
 public class JDBCWriterRepositoryImpl implements WriterRepository {
 
+    private static final String GET_BY_ID = "SELECT * FROM writers WHERE WriterId = ?";
+    public static final String GET_POSTS_BY_ID = "SELECT * FROM posts WHERE WriterId = ?";
     private static final String GET_ALL_QUERY = "SELECT * FROM writers";
-    private static final String GET_BY_ID = "SELECT * FROM writers where WriterId = ?";
     private static final String SAVE_QUERY = "INSERT INTO writers (FirstName, LastName) VALUES (?,?)";
     private static final String UPDATE_QUERY = "UPDATE writers SET FirstName = ?, LastName = ? WHERE WriterId = ?";
     private static final String DELETE_QUERY = "DELETE FROM writers WHERE WriterId = ?";
@@ -121,5 +124,27 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
             throw new RuntimeException(exception);
         }
         return writer;
+    }
+
+    @Override
+    public List<Post> getPostsByWriterId(long id) {
+        List<Post> posts = new ArrayList<>();
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_POSTS_BY_ID);
+            preparedStatement.setLong(1, id);
+            @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                posts.add(
+                        Post.builder().id(resultSet.getLong(1))
+                        .content(resultSet.getString(4))
+                        .created(resultSet.getTimestamp(5))
+                        .updated(resultSet.getTimestamp(6))
+                        .labels(new JDBCPostRepositoryImpl().getLabelsByPostId(resultSet.getLong(1)))
+                        .build());
+            }
+        }catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+        return posts;
     }
 }
