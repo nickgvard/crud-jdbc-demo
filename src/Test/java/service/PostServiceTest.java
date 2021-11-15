@@ -8,12 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.jdbc_impl.JDBCPostRepositoryImpl;
+import repository.jdbc.JDBCPostRepositoryImpl;
+
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -87,7 +88,6 @@ public class PostServiceTest {
     }
 
     private Post post() {
-        return new Post(1, "Some content",
-                new Timestamp(10000000L), new Timestamp(20000000L));
+        return Post.builder().id(1).content("Some content").created(new Timestamp(10000000L)).updated(new Timestamp(20000000L)).build();
     }
 }

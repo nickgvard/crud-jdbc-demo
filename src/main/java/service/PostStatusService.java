@@ -1,7 +1,7 @@
 package service;
 
 import enums.PostStatus;
-import repository.jdbc_impl.JDBCPostStatusRepositoryImpl;
+import repository.jdbc.JDBCPostStatusRepositoryImpl;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
-package repository.jdbc_impl;
+package repository.jdbc;
 
 import enums.PostStatus;
+import lombok.Cleanup;
 import repository.PostStatusRepository;
 import utils.database.DataBaseAccess;
 
@@ -26,9 +27,10 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
     @Override
     public PostStatus getById(Long aLong) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)){
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID);
             preparedStatement.setLong(1, aLong);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
                 int id = resultSet.getInt(1);
                 switch (id) {
@@ -51,8 +53,9 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
     @Override
     public List<PostStatus> getAll() {
         List<PostStatus> postStatuses = new ArrayList<>();
-        try (Statement statement = DataBaseAccess.statement();
-             ResultSet resultSet = statement.executeQuery(GET_ALL_QUERY)){
+        try {
+            @Cleanup Statement statement = DataBaseAccess.statement();
+            @Cleanup ResultSet resultSet = statement.executeQuery(GET_ALL_QUERY);
             while (resultSet.next()) {
                 String postStatus = resultSet.getString(2).toUpperCase().replaceAll("\\s", "_");
                 postStatuses.add(PostStatus.valueOf(postStatus));
@@ -67,8 +70,9 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
     @Override
     public PostStatus save(PostStatus postStatus) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY)){
-            preparedStatement.setLong(1, postStatus.statusId());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY);
+            preparedStatement.setLong(1, postStatus.getStatusId());
             preparedStatement.setString(2, postStatus.name());
             preparedStatement.executeUpdate();
 
@@ -82,9 +86,10 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
     @Override
     public PostStatus update(PostStatus postStatus) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY)){
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY);
             preparedStatement.setString(1, postStatus.name());
-            preparedStatement.setLong(2, postStatus.statusId());
+            preparedStatement.setLong(2, postStatus.getStatusId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
@@ -96,8 +101,9 @@ public class JDBCPostStatusRepositoryImpl implements PostStatusRepository {
 
     @Override
     public PostStatus deleteById(PostStatus postStatus) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY)){
-            preparedStatement.setLong(1, postStatus.statusId());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY);
+            preparedStatement.setLong(1, postStatus.getStatusId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());

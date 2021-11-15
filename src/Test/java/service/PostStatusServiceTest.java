@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.jdbc_impl.JDBCPostStatusRepositoryImpl;
+import repository.jdbc.JDBCPostStatusRepositoryImpl;
 
 import java.util.*;
 
@@ -42,9 +42,9 @@ public class PostStatusServiceTest {
     @Test
     public void whenReadPostStatusACTIVE() {
         PostStatus expected = PostStatus.ACTIVE;
-        when(statusRepository.getById(PostStatus.ACTIVE.statusId())).thenReturn(expected);
+        when(statusRepository.getById(PostStatus.ACTIVE.getStatusId())).thenReturn(expected);
 
-        PostStatus actual = statusService.getById(PostStatus.ACTIVE.statusId());
+        PostStatus actual = statusService.getById(PostStatus.ACTIVE.getStatusId());
 
         assertEquals(expected, actual);
     }
@@ -52,9 +52,9 @@ public class PostStatusServiceTest {
     @Test
     public void whenReadPostStatusDELETED() {
         PostStatus expected = PostStatus.DELETED;
-        when(statusRepository.getById(PostStatus.DELETED.statusId())).thenReturn(expected);
+        when(statusRepository.getById(PostStatus.DELETED.getStatusId())).thenReturn(expected);
 
-        PostStatus actual = statusService.getById(PostStatus.DELETED.statusId());
+        PostStatus actual = statusService.getById(PostStatus.DELETED.getStatusId());
 
         assertEquals(expected, actual);
     }
@@ -62,9 +62,9 @@ public class PostStatusServiceTest {
     @Test
     public void whenReadPostStatusUNDER_REVIEW() {
         PostStatus expected = PostStatus.UNDER_REVIEW;
-        when(statusRepository.getById(PostStatus.UNDER_REVIEW.statusId())).thenReturn(expected);
+        when(statusRepository.getById(PostStatus.UNDER_REVIEW.getStatusId())).thenReturn(expected);
 
-        PostStatus actual = statusService.getById(PostStatus.UNDER_REVIEW.statusId());
+        PostStatus actual = statusService.getById(PostStatus.UNDER_REVIEW.getStatusId());
 
         assertEquals(expected, actual);
     }

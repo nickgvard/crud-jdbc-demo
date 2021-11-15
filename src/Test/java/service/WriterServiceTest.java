@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.jdbc_impl.JDBCWriterRepositoryImpl;
+import repository.jdbc.JDBCWriterRepositoryImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +88,6 @@ public class WriterServiceTest {
     }
 
     private Writer writer() {
-        return new Writer("Some first name", "Some last name");
+        return Writer.builder().firstName("Some last name").lastName("Some last name").build();
     }
 }

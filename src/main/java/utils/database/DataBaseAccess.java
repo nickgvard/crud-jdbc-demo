@@ -11,7 +11,7 @@ public class DataBaseAccess {
 
     public static PreparedStatement preparedStatement(String sql, boolean autoCommit) {
         try {
-            final Connection connection = ConnectionPool.pool().connection();
+            final Connection connection = ConnectionPoolImpl.pool().connection();
             if(!autoCommit)
                 connection.setAutoCommit(false);
             return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -22,7 +22,7 @@ public class DataBaseAccess {
 
     public static PreparedStatement preparedStatement(String sql) {
         try {
-            final Connection connection = ConnectionPool.pool().connection();
+            final Connection connection = ConnectionPoolImpl.pool().connection();
             return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -31,7 +31,7 @@ public class DataBaseAccess {
 
     public static Statement statement() {
         try {
-            final Connection connection = ConnectionPool.pool().connection();
+            final Connection connection = ConnectionPoolImpl.pool().connection();
             return connection.createStatement();
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -39,6 +39,6 @@ public class DataBaseAccess {
     }
 
     public static void returnConnection(Connection connection) {
-        ConnectionPool.pool().retrieve(connection);
+        ConnectionPoolImpl.pool().retrieve(connection);
     }
 }

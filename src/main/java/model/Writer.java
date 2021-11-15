@@ -1,5 +1,9 @@
 package model;
 
+import lombok.Getter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
 import java.util.List;
 
 /**
@@ -7,44 +11,15 @@ import java.util.List;
  * 13.11.2021
  */
 
+@ToString
+@SuperBuilder
 public class Writer extends BaseEntity {
 
-    private final String firstName;
-    private final String lastName;
-    private List<Post> posts;
-
-    public Writer(long id, String firstName, String lastName) {
-        super(id);
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public Writer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public String firstName() {
-        return firstName;
-    }
-
-    public String lastName() {
-        return lastName;
-    }
-
-    public List<Post> posts() {
-        return posts;
-    }
+    @Getter private final String firstName;
+    @Getter private final String lastName;
+    @Getter private List<Post> posts;
 
     public void addPost(Post post) {
         posts.add(post);
-    }
-
-    @Override
-    public String toString() {
-        return "Writer {" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                "}";
     }
 }

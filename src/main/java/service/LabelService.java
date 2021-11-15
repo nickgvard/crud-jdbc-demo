@@ -1,7 +1,7 @@
 package service;
 
 import model.Label;
-import repository.jdbc_impl.JDBCLabelRepositoryImpl;
+import repository.jdbc.JDBCLabelRepositoryImpl;
 
 import java.util.List;
 

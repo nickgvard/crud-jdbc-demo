@@ -9,13 +9,14 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
         <liquibase.version>4.2.0</liquibase.version>
         <mockito.version>3.11.2</mockito.version>
         <junit.version>4.11</junit.version>
         <mysql.version>8.0.22</mysql.version>
-        <profile.propertyFile>src/main/resources/db/migration/db.properties</profile.propertyFile>
+        <lombok.version>1.18.22</lombok.version>
+        <commons.text.version>1.3</commons.text.version>
+        <profile.propertyFile>src/main/resources/db/migration/liquibase.properties</profile.propertyFile>
         <profile.changeLogFile>src/main/resources/db/migration/master.xml</profile.changeLogFile>
     </properties>
 
@@ -43,9 +44,10 @@
             <version>${mysql.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.3</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -59,6 +61,22 @@
                     <configuration>
                         <propertyFile>${profile.propertyFile}</propertyFile>
                         <changeLogFile>${profile.changeLogFile}</changeLogFile>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
             </plugins>

@@ -8,13 +8,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import repository.jdbc_impl.JDBCLabelRepositoryImpl;
+import repository.jdbc.JDBCLabelRepositoryImpl;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LabelServiceTest {
@@ -89,6 +89,6 @@ public class LabelServiceTest {
     }
 
     private Label label() {
-        return new Label(1, "Some name label");
+        return Label.builder().id(1).name("Some label name").build();
     }
 }

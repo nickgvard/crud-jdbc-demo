@@ -1,5 +1,6 @@
-package repository.jdbc_impl;
+package repository.jdbc;
 
+import lombok.Cleanup;
 import model.Writer;
 import repository.WriterRepository;
 import utils.database.DataBaseAccess;
@@ -26,16 +27,17 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
     @Override
     public Writer getById(Long aLong) {
         Writer writer = null;
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)){
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID);
             preparedStatement.setLong(1, aLong);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
-                writer = new Writer(
-                        resultSet.getLong(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3));
+                writer = Writer.builder()
+                        .id(resultSet.getLong(1))
+                        .firstName(resultSet.getString(2))
+                        .lastName(resultSet.getString(3))
+                        .build();
             }
-            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -46,16 +48,17 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
     @Override
     public List<Writer> getAll() {
         List<Writer> writers = new ArrayList<>();
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_ALL_QUERY);
-             ResultSet resultSet = preparedStatement.executeQuery()){
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_ALL_QUERY);
+            @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 writers.add(
-                        new Writer(
-                                resultSet.getLong(1),
-                                resultSet.getString(2),
-                                resultSet.getString(3)));
+                        Writer.builder()
+                                .id(resultSet.getLong(1))
+                                .firstName(resultSet.getString(2))
+                                .lastName(resultSet.getString(3))
+                                .build());
             }
-            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -65,22 +68,26 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public Writer save(Writer writer) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY)){
-            preparedStatement.setString(1, writer.firstName());
-            preparedStatement.setString(2, writer.lastName());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY);
+            preparedStatement.setString(1, writer.getFirstName());
+            preparedStatement.setString(2, writer.getLastName());
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            @Cleanup ResultSet resultSet = preparedStatement.getGeneratedKeys();
             long id;
             if(resultSet.next())
                 id = resultSet.getLong(1);
             else
                 throw new RuntimeException("Creating failed");
 
-            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
 
-            return new Writer(id, writer.firstName(), writer.lastName());
+            return Writer.builder()
+                    .id(id)
+                    .firstName(writer.getFirstName())
+                    .lastName(writer.getLastName())
+                    .build();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -88,10 +95,11 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public Writer update(Writer writer) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY)){
-            preparedStatement.setString(1, writer.firstName());
-            preparedStatement.setString(2, writer.lastName());
-            preparedStatement.setLong(3, writer.id());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY);
+            preparedStatement.setString(1, writer.getFirstName());
+            preparedStatement.setString(2, writer.getLastName());
+            preparedStatement.setLong(3, writer.getId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
@@ -103,8 +111,9 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
 
     @Override
     public Writer deleteById(Writer writer) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY)){
-            preparedStatement.setLong(1, writer.id());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY);
+            preparedStatement.setLong(1, writer.getId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());

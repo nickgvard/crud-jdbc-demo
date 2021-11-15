@@ -1,5 +1,6 @@
-package repository.jdbc_impl;
+package repository.jdbc;
 
+import lombok.Cleanup;
 import model.Label;
 import repository.LabelRepository;
 import utils.database.DataBaseAccess;
@@ -24,13 +25,13 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
     @Override
     public Label getById(Long aLong) {
         Label label;
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID)) {
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID);
             preparedStatement.setLong(1, aLong);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            @Cleanup  ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            label = new Label(resultSet.getLong(1), resultSet.getString(3));
+            label = Label.builder().id(resultSet.getLong(1)).name(resultSet.getString(3)).build();
 
-            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -41,13 +42,15 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
     @Override
     public List<Label> getAll() {
         List<Label> labels = new ArrayList<>();
-        try (Statement statement = DataBaseAccess.statement();
-             ResultSet resultSet = statement.executeQuery(GET_ALL_QUERY)){
+        try {
+            @Cleanup Statement statement = DataBaseAccess.statement();
+            @Cleanup ResultSet resultSet = statement.executeQuery(GET_ALL_QUERY);
             while (resultSet.next()) {
                 labels.add(
-                        new Label(
-                                resultSet.getLong(1),
-                                resultSet.getString(3)));
+                        Label.builder()
+                                .id(resultSet.getLong(1))
+                                .name(resultSet.getString(3))
+                                .build());
             }
 
             DataBaseAccess.returnConnection(statement.getConnection());
@@ -59,21 +62,21 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label save(Label label) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY)){
-            preparedStatement.setString(1, label.name());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY);
+            preparedStatement.setString(1, label.getName());
             preparedStatement.executeUpdate();
 
-            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            @Cleanup ResultSet resultSet = preparedStatement.getGeneratedKeys();
             long id;
             if(resultSet.first())
                 id = resultSet.getLong(1);
             else
                 throw new RuntimeException("Creating failed");
 
-            resultSet.close();
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
 
-            return new Label(id, label.name());
+            return Label.builder().id(id).name(label.getName()).build();
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -81,9 +84,10 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label update(Label label) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY)){
-            preparedStatement.setString(1, label.name());
-            preparedStatement.setLong(2, label.id());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(UPDATE_QUERY);
+            preparedStatement.setString(1, label.getName());
+            preparedStatement.setLong(2, label.getId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
@@ -95,8 +99,9 @@ public class JDBCLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label deleteById(Label label) {
-        try (PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY)){
-            preparedStatement.setLong(1, label.id());
+        try {
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(DELETE_QUERY);
+            preparedStatement.setLong(1, label.getId());
             preparedStatement.executeUpdate();
 
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
