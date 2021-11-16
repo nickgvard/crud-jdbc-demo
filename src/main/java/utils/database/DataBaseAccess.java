@@ -9,6 +9,15 @@ import java.sql.*;
 
 public class DataBaseAccess {
 
+    public static PreparedStatement preparedStatement(String sql) {
+        try {
+            final Connection connection = ConnectionPoolImpl.pool().connection();
+            return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        }catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
     public static PreparedStatement preparedStatement(String sql, boolean autoCommit) {
         try {
             final Connection connection = ConnectionPoolImpl.pool().connection();
@@ -20,10 +29,15 @@ public class DataBaseAccess {
         }
     }
 
-    public static PreparedStatement preparedStatement(String sql) {
+    public static PreparedStatement preparedStatement(String sql, boolean autoCommit, boolean useResultType) {
         try {
             final Connection connection = ConnectionPoolImpl.pool().connection();
-            return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            if(!autoCommit)
+                connection.setAutoCommit(false);
+            if(useResultType)
+                return connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            else
+                return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

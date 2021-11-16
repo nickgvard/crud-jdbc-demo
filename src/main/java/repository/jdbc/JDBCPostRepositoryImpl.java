@@ -21,7 +21,7 @@ import java.util.List;
 public class JDBCPostRepositoryImpl implements PostRepository {
 
     private static final String GET_BY_ID = "SELECT * FROM posts WHERE PostId = ?";
-    private static final String GET_LABELS_BY_ID = "SELECT * FROM labels AS l LEFT JOIN posts_labels AS pl ON p.PostId = pl.PostId WHERE PostId = ?";
+    private static final String GET_LABELS_BY_POST_ID = "SELECT * FROM labels AS l LEFT JOIN posts_labels AS pl ON l.LabelId = pl.LabelId WHERE pl.PostId = ?";
     private static final String GET_ALL_QUERY = "SELECT * FROM posts";
     private static final String SAVE_QUERY = "INSERT INTO posts (Content, Created, PostStatusId) VALUES (?,?,?)";
     private static final String UPDATE_QUERY = "UPDATE posts SET Content = ?, Updated = ? WHERE PostId = ?";
@@ -31,10 +31,10 @@ public class JDBCPostRepositoryImpl implements PostRepository {
     public Post getById(Long aLong) {
         Post post = null;
         try {
-            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID);
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_BY_ID, true, true);
             preparedStatement.setLong(1, aLong);
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 post = Post.builder()
                         .id(resultSet.getLong(1))
                         .content(resultSet.getString(4))
@@ -53,7 +53,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
     public List<Post> getAll() {
         List<Post> posts = new ArrayList<>();
         try {
-            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_ALL_QUERY);
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_ALL_QUERY, true, true);
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 posts.add(
@@ -75,7 +75,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
     @Override
     public Post save(Post post) {
         try {
-            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY);
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(SAVE_QUERY, true, false);
             preparedStatement.setString(1, post.getContent());
             preparedStatement.setTimestamp(2, post.getCreated());
             preparedStatement.setLong(3, PostStatus.UNDER_REVIEW.getStatusId());
@@ -135,7 +135,7 @@ public class JDBCPostRepositoryImpl implements PostRepository {
     public List<Label> getLabelsByPostId(long id) {
         List<Label> labels = new ArrayList<>();
         try {
-            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_LABELS_BY_ID);
+            @Cleanup PreparedStatement preparedStatement = DataBaseAccess.preparedStatement(GET_LABELS_BY_POST_ID);
             preparedStatement.setLong(1, id);
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

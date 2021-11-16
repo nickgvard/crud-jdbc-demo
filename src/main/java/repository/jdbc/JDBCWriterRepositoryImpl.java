@@ -20,7 +20,7 @@ import java.util.List;
 public class JDBCWriterRepositoryImpl implements WriterRepository {
 
     private static final String GET_BY_ID = "SELECT * FROM writers WHERE WriterId = ?";
-    public static final String GET_POSTS_BY_ID = "SELECT * FROM posts WHERE WriterId = ?";
+    private static final String GET_POSTS_BY_ID = "SELECT * FROM posts WHERE WriterId = ?";
     private static final String GET_ALL_QUERY = "SELECT * FROM writers";
     private static final String SAVE_QUERY = "INSERT INTO writers (FirstName, LastName) VALUES (?,?)";
     private static final String UPDATE_QUERY = "UPDATE writers SET FirstName = ?, LastName = ? WHERE WriterId = ?";
@@ -136,12 +136,9 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
             @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 posts.add(
-                        Post.builder().id(resultSet.getLong(1))
-                        .content(resultSet.getString(4))
-                        .created(resultSet.getTimestamp(5))
-                        .updated(resultSet.getTimestamp(6))
-                        .labels(new JDBCPostRepositoryImpl().getLabelsByPostId(resultSet.getLong(1)))
-                        .build());
+                        new JDBCPostRepositoryImpl()
+                                .getById(
+                                        resultSet.getLong(1)));
             }
         }catch (SQLException exception) {
             throw new RuntimeException(exception);
