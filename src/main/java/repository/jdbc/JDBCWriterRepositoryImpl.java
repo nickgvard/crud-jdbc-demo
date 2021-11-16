@@ -1,7 +1,6 @@
 package repository.jdbc;
 
 import lombok.Cleanup;
-import model.Label;
 import model.Post;
 import model.Writer;
 import repository.WriterRepository;
@@ -39,6 +38,7 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
                         .id(resultSet.getLong(1))
                         .firstName(resultSet.getString(2))
                         .lastName(resultSet.getString(3))
+                        .posts(getPostsByWriterId(resultSet.getLong(1)))
                         .build();
             }
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
@@ -60,6 +60,7 @@ public class JDBCWriterRepositoryImpl implements WriterRepository {
                                 .id(resultSet.getLong(1))
                                 .firstName(resultSet.getString(2))
                                 .lastName(resultSet.getString(3))
+                                .posts(getPostsByWriterId(resultSet.getLong(1)))
                                 .build());
             }
             DataBaseAccess.returnConnection(preparedStatement.getConnection());
