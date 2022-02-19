@@ -1,9 +1,4 @@
-## Demo of a simple CRUD Console Application
-### With a simple Connection Pool
-> Interacts with the database 
-and allows you to perform all CRUD operations on entities.
->
-> MVC Pattern (Layers: View, Controller, Service, Repo, Model).
+## Demo of a simple CRUD Application with JDBC
 
 ### Technology stack:
 + Java
